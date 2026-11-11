@@ -99,7 +99,7 @@ results/
   figures/                deck figures
   summary.json            every number used in the report
 docs/                     method, results, error analysis, Project Card, team
-paper/                    Team10_MidProject.pdf and editable pptx
+paper/                    Team10_MidProject.pdf + self-contained HTML deck
 tests/                    CPU-only unit tests
 ```
 
