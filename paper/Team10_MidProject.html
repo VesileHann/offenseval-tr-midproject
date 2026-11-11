@@ -492,8 +492,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 <div class="deck-viewport">
   <main class="deck-stage" id="deckStage">
 
-<!-- notes: Research question first. The answer is no under two pre-registered conditions: a gap below 0.02 macro-F1, or a paired bootstrap that cannot rule out chance. Test-set baseline only; method results on dev. -->
-<section class="slide title-slide" id="s1" data-page="1" data-notes="Research question first. The answer is no under two pre-registered conditions: a gap below 0.02 macro-F1, or a paired bootstrap that cannot rule out chance. Test-set baseline only; method results on dev." role="group" aria-label="Slide 1 of 14: With 750 labelled tweets, does fine‑tuning beat a calibrated open LLM?">
+<!-- notes: We start with the question. We have 750 labelled Turkish tweets. We can fine-tune BERTurk on them, or prompt an open LLM with 8 examples and use the other 742 labels to set its threshold. Both are scored with macro-F1 on the frozen 3,528-tweet test set. We call the answer no if BERTurk's average over 10 runs is less than 0.02 above the LLM's average over 3 runs, or if the paired bootstrap says the gap could be chance. The first number on the slide is 0.763, the TF-IDF baseline on test. The other two are dev results: 0.767 for BERTurk-750 and 0.790 for the best LLM. -->
+<section class="slide title-slide" id="s1" data-page="1" data-notes="We start with the question. We have 750 labelled Turkish tweets. We can fine-tune BERTurk on them, or prompt an open LLM with 8 examples and use the other 742 labels to set its threshold. Both are scored with macro-F1 on the frozen 3,528-tweet test set. We call the answer no if BERTurk's average over 10 runs is less than 0.02 above the LLM's average over 3 runs, or if the paired bootstrap says the gap could be chance. The first number on the slide is 0.763, the TF-IDF baseline on test. The other two are dev results: 0.767 for BERTurk-750 and 0.790 for the best LLM." role="group" aria-label="Slide 1 of 14: With 750 labelled tweets, does fine‑tuning beat a calibrated open LLM?">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">Team 10 · CSE 484 / CSE 654 · Mid-project · 12 November 2026</span>
@@ -521,8 +521,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Counts are from our own load of the official zip, SHA-256 checked. 31,756 official train tweets split into 30,000 train and 1,756 dev, stratified, seed 42. Test set frozen. -->
-<section class="slide " id="s2" data-page="2" data-notes="Counts are from our own load of the official zip, SHA-256 checked. 31,756 official train tweets split into 30,000 train and 1,756 dev, stratified, seed 42. Test set frozen." role="group" aria-label="Slide 2 of 14: 30,000 train / 1,756 dev / 3,528 frozen test; 19.3% offensive" aria-hidden="true">
+<!-- notes: The data is OffensEval-TR 2020. The official training file has 31,756 tweets. We set aside 1,756 as dev and train on 30,000. The test set has 3,528 tweets and stays frozen. About 19.3 percent of the data is offensive. The two examples show why the target matters. Swearing at a red card is still offensive. Cursing at traffic is not. Because only one in five tweets is offensive, a model that always says not offensive is 80.7 percent accurate but scores 0.447 macro-F1. Accuracy would hide that failure. That is why macro-F1 is the metric we report. -->
+<section class="slide " id="s2" data-page="2" data-notes="The data is OffensEval-TR 2020. The official training file has 31,756 tweets. We set aside 1,756 as dev and train on 30,000. The test set has 3,528 tweets and stays frozen. About 19.3 percent of the data is offensive. The two examples show why the target matters. Swearing at a red card is still offensive. Cursing at traffic is not. Because only one in five tweets is offensive, a model that always says not offensive is 80.7 percent accurate but scores 0.447 macro-F1. Accuracy would hide that failure. That is why macro-F1 is the metric we report." role="group" aria-label="Slide 2 of 14: 30,000 train / 1,756 dev / 3,528 frozen test; 19.3% offensive" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">01 · Data as loaded</span>
@@ -555,8 +555,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Baseline row the rubric asks for: frozen test, spread shown. Full-data TF-IDF is deterministic, so the uncertainty is test-set luck: 95% bootstrap [0.745, 0.779]. -->
-<section class="slide " id="s3" data-page="3" data-notes="Baseline row the rubric asks for: frozen test, spread shown. Full-data TF-IDF is deterministic, so the uncertainty is test-set luck: 95% bootstrap [0.745, 0.779]." role="group" aria-label="Slide 3 of 14: TF-IDF + LR reaches 0.763 on test; 0.620 with 750 labels" aria-hidden="true">
+<!-- notes: This is the baseline we must beat. TF-IDF with logistic regression scores 0.620 on test at 750 labels, with a standard deviation of 0.012 over 10 samples. On dev it scores 0.613. At 30,000 labels the test score is 0.763, with a 95 percent interval from 0.745 to 0.779. The curve also shows the BERTurk dev points: 0.767 at 750 labels and 0.832 at 30,000. The floor for both methods is 0.620 at the label budget in our question. -->
+<section class="slide " id="s3" data-page="3" data-notes="This is the baseline we must beat. TF-IDF with logistic regression scores 0.620 on test at 750 labels, with a standard deviation of 0.012 over 10 samples. On dev it scores 0.613. At 30,000 labels the test score is 0.763, with a 95 percent interval from 0.745 to 0.779. The curve also shows the BERTurk dev points: 0.767 at 750 labels and 0.832 at 30,000. The floor for both methods is 0.620 at the label budget in our question." role="group" aria-label="Slide 3 of 14: TF-IDF + LR reaches 0.763 on test; 0.620 with 750 labels" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">02 · Baseline on the frozen test set</span>
@@ -585,8 +585,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: We audited 30 false alarms and 30 misses. The model reacts to conflict vocabulary, not to whether a person is insulted. It also misses implicit insults and masked swearing. About 15% is label noise. -->
-<section class="slide " id="s4" data-page="4" data-notes="We audited 30 false alarms and 30 misses. The model reacts to conflict vocabulary, not to whether a person is insulted. It also misses implicit insults and masked swearing. About 15% is label noise." role="group" aria-label="Slide 4 of 14: 275 dev errors; a 60-error audit shows where a word model fails" aria-hidden="true">
+<!-- notes: We looked at 275 dev errors. 166 are false alarms and 109 are missed offensive tweets. We audited 60 of them, 30 in each direction. False alarms are mostly political or religious criticism, tweets with no insult, and sports banter. Misses are mostly implicit insults and masked profanity. The three examples show the pattern. The model reacts to conflict words and character n-grams. It does not check whether a person is insulted. About one in seven audited errors is label noise, so the ceiling is below 1.0. -->
+<section class="slide " id="s4" data-page="4" data-notes="We looked at 275 dev errors. 166 are false alarms and 109 are missed offensive tweets. We audited 60 of them, 30 in each direction. False alarms are mostly political or religious criticism, tweets with no insult, and sports banter. Misses are mostly implicit insults and masked profanity. The three examples show the pattern. The model reacts to conflict words and character n-grams. It does not check whether a person is insulted. About one in seven audited errors is label noise, so the ceiling is below 1.0." role="group" aria-label="Slide 4 of 14: 275 dev errors; a 60-error audit shows where a word model fails" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">03 · Error analysis</span>
@@ -611,8 +611,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Both arms are implemented. The LLM never writes: we read the probability of A versus B at the answer token. The eight examples come from the same 750 tweets, and the other 742 choose the threshold. -->
-<section class="slide " id="s5" data-page="5" data-notes="Both arms are implemented. The LLM never writes: we read the probability of A versus B at the answer token. The eight examples come from the same 750 tweets, and the other 742 choose the threshold." role="group" aria-label="Slide 5 of 14: Both arms run end-to-end; first dev numbers" aria-hidden="true">
+<!-- notes: Both arms now run end to end. The controlled change is how the same 750 labels are used. The baseline trains weights. The LLM uses 8 examples and a threshold. The LLM table shows the first dev numbers. Qwen3-8B goes from 0.162 zero-shot to 0.628 after calibration. Gemma-2-9B goes from 0.412 to 0.500. BERTurk-750 is 0.767. The calibration gain is much larger for Qwen, and that is the next slide. -->
+<section class="slide " id="s5" data-page="5" data-notes="Both arms now run end to end. The controlled change is how the same 750 labels are used. The baseline trains weights. The LLM uses 8 examples and a threshold. The LLM table shows the first dev numbers. Qwen3-8B goes from 0.162 zero-shot to 0.628 after calibration. Gemma-2-9B goes from 0.412 to 0.500. BERTurk-750 is 0.767. The calibration gain is much larger for Qwen, and that is the next slide." role="group" aria-label="Slide 5 of 14: Both arms run end-to-end; first dev numbers" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">04 · Method status</span>
@@ -646,8 +646,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: On dev, BERTurk-750 beats both LLMs named in the proposal. Gemma-4-12B is still ahead by 0.023. BERTurk at 30,000 labels reaches 0.832. -->
-<section class="slide " id="s6" data-page="6" data-notes="On dev, BERTurk-750 beats both LLMs named in the proposal. Gemma-4-12B is still ahead by 0.023. BERTurk at 30,000 labels reaches 0.832." role="group" aria-label="Slide 6 of 14: BERTurk beats both proposal LLMs; Gemma-4-12B leads on dev" aria-hidden="true">
+<!-- notes: On dev, BERTurk-750 at 0.767 beats both LLMs named in the proposal. Qwen3-8B is 0.628 and Gemma-2-9B is 0.500. Gemma-4-12B is the strongest LLM at 0.790, which is 0.023 ahead of BERTurk. BERTurk at 30,000 labels reaches 0.832. These are dev numbers. The frozen-test comparison is still pending. -->
+<section class="slide " id="s6" data-page="6" data-notes="On dev, BERTurk-750 at 0.767 beats both LLMs named in the proposal. Qwen3-8B is 0.628 and Gemma-2-9B is 0.500. Gemma-4-12B is the strongest LLM at 0.790, which is 0.023 ahead of BERTurk. BERTurk at 30,000 labels reaches 0.832. These are dev numbers. The frozen-test comparison is still pending." role="group" aria-label="Slide 6 of 14: BERTurk beats both proposal LLMs; Gemma-4-12B leads on dev" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">05 · Dev comparison</span>
@@ -671,8 +671,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Qwen's zero-shot scores are shifted positive, so threshold 0 labels almost everything offensive. Gemma is already near its best threshold at zero. This is not evidence Gemma saw the benchmark. -->
-<section class="slide " id="s7" data-page="7" data-notes="Qwen's zero-shot scores are shifted positive, so threshold 0 labels almost everything offensive. Gemma is already near its best threshold at zero. This is not evidence Gemma saw the benchmark." role="group" aria-label="Slide 7 of 14: Qwen is shifted; Gemma’s threshold is already near optimal" aria-hidden="true">
+<!-- notes: This slide explains the calibration gap. The table shows zero-shot diagnostics. Qwen3-14B has F1 0.171 at threshold zero, but 0.677 at its best threshold, and an AUC of 0.756. Both mean scores are above zero, so threshold zero calls 99 percent of tweets offensive. Gemma-4-12B has F1 0.763 at zero and 0.765 at its best threshold, with an AUC of 0.864. Its means are -4.13 and 1.03, so it is already centred. The 8 examples still help Qwen: 0.677 becomes 0.773 after calibration. This is threshold geometry, not proof of contamination. The exact-completion check is still planned. -->
+<section class="slide " id="s7" data-page="7" data-notes="This slide explains the calibration gap. The table shows zero-shot diagnostics. Qwen3-14B has F1 0.171 at threshold zero, but 0.677 at its best threshold, and an AUC of 0.756. Both mean scores are above zero, so threshold zero calls 99 percent of tweets offensive. Gemma-4-12B has F1 0.763 at zero and 0.765 at its best threshold, with an AUC of 0.864. Its means are -4.13 and 1.03, so it is already centred. The 8 examples still help Qwen: 0.677 becomes 0.773 after calibration. This is threshold geometry, not proof of contamination. The exact-completion check is still planned." role="group" aria-label="Slide 7 of 14: Qwen is shifted; Gemma’s threshold is already near optimal" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">06 · Calibration</span>
@@ -702,8 +702,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: The cost view: scoring throughput, wall time, load time and peak memory. Few-shot is much slower because the prompt repeats eight examples. TF-IDF is orders of magnitude cheaper. -->
-<section class="slide " id="s8" data-page="8" data-notes="The cost view: scoring throughput, wall time, load time and peak memory. Few-shot is much slower because the prompt repeats eight examples. TF-IDF is orders of magnitude cheaper." role="group" aria-label="Slide 8 of 14: One dev pass on an L4: 3 to 5 tweets/s with examples, 10 to 18 without" aria-hidden="true">
+<!-- notes: This is the cost view on one L4. TF-IDF scores the 1,756 dev tweets in 0.6 seconds. Few-shot LLMs run at 2.7 to 5 tweets per second. Qwen3-14B zero-shot reaches 9.8 per second. BERTurk-750 trains in 35 seconds, and 30,000 labels take about 29 minutes. The 46 fine-tuning runs use about 3 Colab units. The 16 LLM passes use about 2.5 L4-hours. The LLM arm is the expensive part. -->
+<section class="slide " id="s8" data-page="8" data-notes="This is the cost view on one L4. TF-IDF scores the 1,756 dev tweets in 0.6 seconds. Few-shot LLMs run at 2.7 to 5 tweets per second. Qwen3-14B zero-shot reaches 9.8 per second. BERTurk-750 trains in 35 seconds, and 30,000 labels take about 29 minutes. The 46 fine-tuning runs use about 3 Colab units. The 16 LLM passes use about 2.5 L4-hours. The LLM arm is the expensive part." role="group" aria-label="Slide 8 of 14: One dev pass on an L4: 3 to 5 tweets/s with examples, 10 to 18 without" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">07 · Cost and throughput</span>
@@ -723,8 +723,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Ablation A isolates Turkish-only pretraining: BERTurk 0.767 vs XLM-R 0.670, gap +0.097. Ablation B isolates instruction language. Test opens only after methods freeze. -->
-<section class="slide " id="s9" data-page="9" data-notes="Ablation A isolates Turkish-only pretraining: BERTurk 0.767 vs XLM-R 0.670, gap +0.097. Ablation B isolates instruction language. Test opens only after methods freeze." role="group" aria-label="Slide 9 of 14: Done: BERTurk and Ablation A. Every remaining step has a date and an owner" aria-hidden="true">
+<!-- notes: This is the plan to the final. BERTurk curve and Ablation A are done. Ablation B and the contamination check come next. Then we freeze methods, open the test set, run the final jobs, do the bootstrap and error analysis, and write the paper and report. Every row has a date and an owner. Ablation A is Vesile's, and Ablation B is Gürkan's. The biggest risk is a 26B model on an L4. The fallback is Qwen3-14B alone. Test opens only after methods freeze. -->
+<section class="slide " id="s9" data-page="9" data-notes="This is the plan to the final. BERTurk curve and Ablation A are done. Ablation B and the contamination check come next. Then we freeze methods, open the test set, run the final jobs, do the bootstrap and error analysis, and write the paper and report. Every row has a date and an owner. Ablation A is Vesile's, and Ablation B is Gürkan's. The biggest risk is a 26B model on an L4. The fallback is Qwen3-14B alone. Test opens only after methods freeze." role="group" aria-label="Slide 9 of 14: Done: BERTurk and Ablation A. Every remaining step has a date and an owner" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">08 · Plan to the final</span>
@@ -755,8 +755,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Close with the three numbers: baseline floor on test, strongest calibrated LLM on dev, and BERTurk on dev. The final answer uses the frozen test set and paired bootstrap. -->
-<section class="slide spread" id="s10" data-page="10" data-notes="Close with the three numbers: baseline floor on test, strongest calibrated LLM on dev, and BERTurk on dev. The final answer uses the frozen test set and paired bootstrap." role="group" aria-label="Slide 10 of 14: What we know, what we do not, and what comes next" aria-hidden="true">
+<!-- notes: We close with three numbers. The baseline reaches 0.763 on test at 30,000 labels and 0.620 at 750 labels. The best LLM on dev is Gemma-4-12B at 0.790, and Qwen3-14B reaches 0.773. BERTurk-750 is 0.767 on dev, BERTurk at 30,000 is 0.832, and the gap to Gemma-4-12B is -0.023. We still do not have test-set scores for either arm. The final verdict uses the frozen test set. Four choices were fixed before any method ran: the test split, macro-F1, the 0.02 minimum gap, and the paired bootstrap over 10,000 resamples. Questions welcome. -->
+<section class="slide spread" id="s10" data-page="10" data-notes="We close with three numbers. The baseline reaches 0.763 on test at 30,000 labels and 0.620 at 750 labels. The best LLM on dev is Gemma-4-12B at 0.790, and Qwen3-14B reaches 0.773. BERTurk-750 is 0.767 on dev, BERTurk at 30,000 is 0.832, and the gap to Gemma-4-12B is -0.023. We still do not have test-set scores for either arm. The final verdict uses the frozen test set. Four choices were fixed before any method ran: the test split, macro-F1, the 0.02 minimum gap, and the paired bootstrap over 10,000 resamples. Questions welcome." role="group" aria-label="Slide 10 of 14: What we know, what we do not, and what comes next" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">09 · Takeaways</span>
@@ -776,8 +776,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Project Card fields 1-3. Abstract under 150 words with the one marked gap. -->
-<section class="slide appendix" id="s11" data-page="11" data-notes="Project Card fields 1-3. Abstract under 150 words with the one marked gap." role="group" aria-label="Slide 11 of 14: Title, abstract, research question, contributions" aria-hidden="true">
+<!-- notes: This appendix is not presented. It covers fields 1 to 3 of the Project Card: the title and abstract, the research question, and the three contributions. The abstract is 136 words. The gap marks where the test result will go. -->
+<section class="slide appendix" id="s11" data-page="11" data-notes="This appendix is not presented. It covers fields 1 to 3 of the Project Card: the title and abstract, the research question, and the three contributions. The abstract is 136 words. The gap marks where the test result will go." role="group" aria-label="Slide 11 of 14: Title, abstract, research question, contributions" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">Project Card · appendix · fields 1-3</span>
@@ -806,8 +806,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Fields 4-5. Eight references with the specific gap; data counts after the fixed split. -->
-<section class="slide appendix" id="s12" data-page="12" data-notes="Fields 4-5. Eight references with the specific gap; data counts after the fixed split." role="group" aria-label="Slide 12 of 14: Related work and data" aria-hidden="true">
+<!-- notes: Appendix fields 4 and 5. The related work list has 8 full references, each with the gap we address. The data slide repeats source, licence, counts and one example. -->
+<section class="slide appendix" id="s12" data-page="12" data-notes="Appendix fields 4 and 5. The related work list has 8 full references, each with the gap we address. The data slide repeats source, licence, counts and one example." role="group" aria-label="Slide 12 of 14: Related work and data" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">Project Card · appendix · fields 4-5</span>
@@ -839,8 +839,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Fields 6-9. Baseline and method, protocol, full results table, error analysis summary. -->
-<section class="slide appendix" id="s13" data-page="13" data-notes="Fields 6-9. Baseline and method, protocol, full results table, error analysis summary." role="group" aria-label="Slide 13 of 14: Method, protocol, results so far, error analysis" aria-hidden="true">
+<!-- notes: Appendix fields 6 to 9. It covers the method, evaluation protocol, full results table and error categories. The test column is empty for method rows because the test set is still frozen. -->
+<section class="slide appendix" id="s13" data-page="13" data-notes="Appendix fields 6 to 9. It covers the method, evaluation protocol, full results table and error categories. The test column is empty for method rows because the test set is still frozen." role="group" aria-label="Slide 13 of 14: Method, protocol, results so far, error analysis" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">Project Card · appendix · fields 6-9</span>
@@ -870,8 +870,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   </div>
 </section>
 
-<!-- notes: Fields 10-12. Both research leads wrote their sections. Ablation A complete. Roles to be confirmed. -->
-<section class="slide appendix" id="s14" data-page="14" data-notes="Fields 10-12. Both research leads wrote their sections. Ablation A complete. Roles to be confirmed." role="group" aria-label="Slide 14 of 14: Research lead, plan and risk, reproducibility" aria-hidden="true">
+<!-- notes: Appendix fields 10 to 12. It covers the two research lead sections, plan and risk, and reproducibility. Roles follow the proposal: fine-tuning side Vesile and Mert, prompting side Gürkan and Utku. Ablation A is Vesile's and Ablation B is Gürkan's. -->
+<section class="slide appendix" id="s14" data-page="14" data-notes="Appendix fields 10 to 12. It covers the two research lead sections, plan and risk, and reproducibility. Roles follow the proposal: fine-tuning side Vesile and Mert, prompting side Gürkan and Utku. Ablation A is Vesile's and Ablation B is Gürkan's." role="group" aria-label="Slide 14 of 14: Research lead, plan and risk, reproducibility" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">Project Card · appendix · fields 10-12</span>
@@ -905,6 +905,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
   <button type="button" data-act="prev" aria-label="Previous slide">←</button>
   <span id="counter">01 / 14</span>
   <button type="button" data-act="next" aria-label="Next slide">→</button>
+  <button type="button" data-act="notes" aria-label="Open speaker notes">Notes</button>
   <button type="button" data-act="help" aria-label="Keyboard help">?</button>
 </nav>
 
@@ -914,6 +915,9 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 /* ===========================================
    SLIDE CONTROLLER — fixed stage, keyboard, touch, wheel
    =========================================== */
+const SLIDE_TIMES = [55, 55, 65, 70, 55, 55, 60, 40, 40, 40, 0, 0, 0, 0];
+const TALK_LIMIT = 600;
+
 class SlidePresentation {
     constructor() {
         this.slides = Array.from(document.querySelectorAll(".slide"));
@@ -921,6 +925,9 @@ class SlidePresentation {
         this.counter = document.getElementById("counter");
         this.live = document.getElementById("live");
         this.i = 0;
+        this.startedAt = Date.now();
+        this.slideStartedAt = Date.now();
+        this.presenterWin = null;
         this.stageScale();
         this.bindKeys();
         this.bindTouch();
@@ -945,7 +952,9 @@ class SlidePresentation {
         document.querySelectorAll(".slide-body > *").forEach((el) => el.classList.add("reveal"));
     }
     goToSlide(n) {
+        const previous = this.i;
         this.i = Math.max(0, Math.min(n, this.slides.length - 1));
+        if (this.i !== previous) this.slideStartedAt = Date.now();
         this.slides.forEach((s, idx) => {
             const on = idx === this.i;
             s.classList.toggle("active", on);
@@ -955,6 +964,7 @@ class SlidePresentation {
         this.counter.textContent = String(this.i + 1).padStart(2, "0") + " / " + this.slides.length;
         this.live.textContent = "Slide " + (this.i + 1) + " of " + this.slides.length + ": " + this.slides[this.i].getAttribute("aria-label");
         history.replaceState(null, "", "#slide-" + (this.i + 1));
+        this.updatePresenter();
     }
     next() { this.goToSlide(this.i + 1); }
     prev() { this.goToSlide(this.i - 1); }
@@ -967,7 +977,97 @@ class SlidePresentation {
             else if (e.key === "End") { e.preventDefault(); this.goToSlide(this.slides.length - 1); }
             else if (e.key === "f" || e.key === "F") { document.documentElement.requestFullscreen?.(); }
             else if (e.key === "e" || e.key === "E") { window.editor?.toggle(); }
+            else if (e.key === "n" || e.key === "N") { this.openPresenter(); }
         });
+    }
+    openPresenter() {
+        if (this.presenterWin && !this.presenterWin.closed) {
+            this.presenterWin.focus();
+            this.updatePresenter();
+            return;
+        }
+        const w = window.open("", "team10-presenter", "width=840,height=720");
+        if (!w) {
+            alert("The browser blocked the notes window. Allow pop-ups for this file and press N again.");
+            return;
+        }
+        const doc = w.document;
+        doc.open();
+        doc.write('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Team 10 speaker notes</title><style>' +
+            'html,body{margin:0;height:100%;background:#17150f;color:#f3eee2;font-family:Georgia,serif}' +
+            'body{padding:26px 30px;box-sizing:border-box;display:flex;flex-direction:column}' +
+            'header{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #5a5244;padding-bottom:12px;font:12px/1.4 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#c8bda6}' +
+            '#clock{color:#f3eee2;white-space:nowrap}' +
+            '#slideid{margin-top:18px;font:12px/1.4 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#c8bda6}' +
+            'h1{font-size:26px;line-height:1.15;margin:8px 0 10px;font-weight:600}' +
+            '#meta{font:13px/1.5 ui-monospace,monospace;color:#c8bda6;margin-bottom:18px}' +
+            '#note{flex:1;overflow:auto;font-size:22px;line-height:1.45;white-space:pre-wrap;border-top:2px solid #b23a22;padding-top:16px}' +
+            'footer{display:flex;gap:10px;border-top:1px solid #5a5244;padding-top:14px;margin-top:14px}' +
+            'button{background:#f3eee2;color:#17150f;border:0;padding:10px 16px;font:13px ui-monospace,monospace;letter-spacing:.08em;cursor:pointer}' +
+            'button:hover{background:#fff}' +
+            '.warn{color:#e07a5f}' +
+            '</style></head><body>' +
+            '<header><span>Team 10 · speaker notes</span><span id="clock">talk 00:00 · left 10:00</span></header>' +
+            '<div id="slideid"></div><h1 id="title"></h1><div id="meta"></div><div id="note"></div>' +
+            '<footer><button id="prev">← prev</button><button id="next">next →</button><button id="reset">reset timer</button></footer>' +
+            '</body></html>');
+        doc.close();
+        this.presenterWin = w;
+
+        const fmt = (sec) => {
+            sec = Math.max(0, Math.round(sec));
+            return String(Math.floor(sec / 60)).padStart(2, "0") + ":" + String(sec % 60).padStart(2, "0");
+        };
+
+        w.setDeckState = (payload) => {
+            w.__state = payload;
+            doc.getElementById("note").textContent = payload.note || "No notes for this slide.";
+            doc.getElementById("title").textContent = payload.title;
+            doc.getElementById("slideid").textContent = "slide " + payload.index + " of " + payload.total;
+            const target = payload.target > 0 ? fmt(payload.target) : "backup slide, not presented";
+            doc.getElementById("meta").textContent = "target " + target;
+            if (w.__render) w.__render();
+        };
+
+        w.__render = () => {
+            const st = w.__state;
+            if (!st) return;
+            const now = Date.now();
+            const elapsed = (now - st.startedAt) / 1000;
+            const onSlide = (now - st.slideStartedAt) / 1000;
+            const left = TALK_LIMIT - elapsed;
+            const clock = doc.getElementById("clock");
+            clock.textContent = "talk " + fmt(elapsed) + " · left " + (left >= 0 ? fmt(left) : "+" + fmt(-left));
+            clock.className = left < 0 ? "warn" : "";
+            if (st.target > 0) {
+                doc.getElementById("meta").textContent = "target " + fmt(st.target) + " · this slide " + fmt(onSlide);
+                doc.getElementById("meta").className = onSlide > st.target + 10 ? "warn" : "";
+            }
+        };
+
+        doc.getElementById("prev").onclick = () => window.presentation.prev();
+        doc.getElementById("next").onclick = () => window.presentation.next();
+        doc.getElementById("reset").onclick = () => this.resetTimer();
+        w.setInterval(w.__render, 250);
+        this.updatePresenter();
+    }
+    updatePresenter() {
+        if (!this.presenterWin || this.presenterWin.closed) return;
+        const slide = this.slides[this.i];
+        this.presenterWin.setDeckState({
+            index: this.i + 1,
+            total: this.slides.length,
+            title: slide.querySelector(".slide-title").textContent,
+            note: slide.dataset.notes || "",
+            target: SLIDE_TIMES[this.i] || 0,
+            startedAt: this.startedAt,
+            slideStartedAt: this.slideStartedAt,
+        });
+    }
+    resetTimer() {
+        this.startedAt = Date.now();
+        this.slideStartedAt = Date.now();
+        this.updatePresenter();
     }
     bindTouch() {
         let x0 = null;
@@ -994,7 +1094,8 @@ class SlidePresentation {
                 const act = b.dataset.act;
                 if (act === "next") this.next();
                 if (act === "prev") this.prev();
-                if (act === "help") alert("←/→ move · Space next · F fullscreen · E edit · Ctrl+S save edited text");
+                if (act === "notes") this.openPresenter();
+                if (act === "help") alert("←/→ move · Space next · F fullscreen · E edit · N speaker notes · Ctrl+S save edited text");
             });
         });
     }

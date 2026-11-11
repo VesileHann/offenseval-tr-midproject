@@ -7,3 +7,4 @@ secrets.env
 .pytest_cache/
 .DS_Store
 *.egg-info/
+paper/SPEAKER_NOTES.md
