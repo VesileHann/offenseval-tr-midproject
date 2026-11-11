@@ -11,6 +11,7 @@ def main():
     ap.add_argument("--model", required=True, choices=sorted(llm.MODEL_IDS))
     ap.add_argument("--mode", default="fewshot", choices=("fewshot", "zeroshot"))
     ap.add_argument("--runs", type=int, default=3)
+    ap.add_argument("--start-run", type=int, default=1)
     ap.add_argument("--batch", type=int, default=8)
     ap.add_argument("--out", default="results/llm")
     ap.add_argument("--zip", default="offenseval2020-turkish.zip")
@@ -18,7 +19,8 @@ def main():
     loaded = data.load(args.zip)
     train, dev = data.make_splits(loaded["train"])
     llm.run(args.model, train, dev, os.path.join(args.out, args.model), args.mode,
-            args.runs, args.batch, token=os.environ.get("HF_TOKEN"))
+            args.runs, args.batch, token=os.environ.get("HF_TOKEN"),
+            start_run=args.start_run)
 
 
 if __name__ == "__main__":

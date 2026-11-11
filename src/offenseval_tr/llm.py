@@ -112,14 +112,14 @@ def score_texts(model, tok, texts, ids, batch: int = 8):
 
 
 def run(model_key: str, train, dev, out_dir: str, mode: str = "fewshot",
-        runs: int = 3, batch: int = 8, token: str | None = None):
+        runs: int = 3, batch: int = 8, token: str | None = None, start_run: int = 1):
     """Run zero-shot or few-shot calibration and write one JSON per run."""
     import json
 
     os.makedirs(out_dir, exist_ok=True)
     model, tok, load_s = load_model(model_key, token)
     ids = option_ids(tok)
-    for k in range(1, runs + 1):
+    for k in range(start_run, runs + 1):
         if mode == "fewshot":
             from .data import subset
             tr = subset(train, 750, k).reset_index(drop=True)
