@@ -6,6 +6,7 @@ import os
 from collections import defaultdict
 
 import numpy as np
+import pandas as pd
 
 
 def main():
@@ -13,10 +14,14 @@ def main():
     dev = json.load(open(f"{root}/baseline/dev_curve.json"))
     test = json.load(open(f"{root}/baseline/test_curve.json"))
     audit = json.load(open(f"{root}/errors/audit.json"))
+    # Always "NOT": F1(OFF) = 0, so macro-F1 is F1(NOT) / 2.
+    test_labels = pd.read_csv(f"{root}/baseline/test_ids.csv").label
+    n_not, n_off = int((test_labels == "NOT").sum()), int((test_labels == "OFF").sum())
+    majority_test = (2 * n_not / (2 * n_not + n_off)) / 2
     summary = {
         "sizes": dev["sizes"],
         "majority_dev": dev["majority_dev_macro_f1"],
-        "majority_test": 0.5,
+        "majority_test": majority_test,
         "dev_curve": dev["curve"],
         "test_curve": test["curve"],
         "tfidf_30000_dev": dev["tfidf_lr_30000_dev"],

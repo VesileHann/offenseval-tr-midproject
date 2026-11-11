@@ -105,7 +105,7 @@ the mean gap is ≥0.02. Fixed before method results; dev is for code checks onl
 
 | System | Dev macro-F1 | Test macro-F1 |
 |---|---:|---:|
-| Always NOT | 0.447 | 0.500 |
+| Always NOT | 0.447 | 0.444 |
 | TF-IDF, 750 | 0.613 ± 0.015 | 0.620 ± 0.012 |
 | TF-IDF, 30,000 | 0.763 [0.739, 0.787] | 0.763 [0.745, 0.779] |
 | Qwen3-8B zero-shot | 0.162 | — |

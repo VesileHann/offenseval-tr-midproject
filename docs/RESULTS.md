@@ -8,7 +8,7 @@ it. `results/summary.json` is the authoritative machine-readable table.
 
 | System | Test macro-F1 | Spread | OFF precision | OFF recall |
 |---|---:|---|---:|---:|
-| Always “not offensive” | 0.500 | deterministic | — | 0.000 |
+| Always “not offensive” | 0.444 | deterministic | — | 0.000 |
 | TF-IDF + LR, 750 labels | 0.620 | sd 0.012 over 10 samples | — | — |
 | TF-IDF + LR, 30,000 labels | **0.763** | 95% CI [0.745, 0.779] | 0.589 | 0.673 |
 
