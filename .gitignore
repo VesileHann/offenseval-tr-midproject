@@ -6,3 +6,4 @@ secrets.env
 .env
 .pytest_cache/
 .DS_Store
+*.egg-info/
