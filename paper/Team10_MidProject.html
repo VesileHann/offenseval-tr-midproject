@@ -114,6 +114,15 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
 .body { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 14px; }
 .slide.spread .body { justify-content: flex-start; gap: 16px; }
 .slide.center-body .body { justify-content: center; gap: 16px; }
+.cols.top { align-items: start; }
+.slide.appendix h1 { font-size: 33px; }
+.slide.appendix h2 { font-size: 17px; }
+.slide.appendix p, .slide.appendix li, .slide.appendix .small { font-size: 14.5px; line-height: 1.36; }
+.slide.appendix table.tiny-table { font-size: 12px; }
+.plan-table td:nth-child(2), .plan-table th:nth-child(2) { text-align: left; }
+.plan-table td:nth-child(1), .plan-table th:nth-child(1) { width: 15%; white-space: nowrap; }
+.plan-table td:nth-child(3), .plan-table th:nth-child(3) { width: 12%; text-align: right; }
+.stat-label { font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 </style>
 </head><body>
 <a class="sr-only" href="#s1">Skip to first slide</a>
@@ -168,9 +177,9 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
     Test frozen; dev only for code checks and mid-project numbers; every system uses the saved subsets (seed 42 + k).</p>
   </div></div>
   </section>
-<section class="slide " id="s3" data-page="3 of 14"
-    data-notes="Baseline row the rubric asks for: frozen test, spread shown. Full-data TF-IDF is deterministic, so the uncertainty is test-set luck: 95% bootstrap [0.745, 0.779]." role="group" aria-label="Slide 3 of 14: TF-IDF + logistic regression reaches 0.763 macro-F1 on test, but 0.620 with 750 labels" aria-hidden="true">
-    <p class="kicker">3 · Baseline on the frozen test set</p><h1>TF-IDF + logistic regression reaches 0.763 macro-F1 on test, but 0.620 with 750 labels</h1><div class="body"><div class="cols c2-narrow">
+<section class="slide center-body" id="s3" data-page="3 of 14"
+    data-notes="Baseline row the rubric asks for: frozen test, spread shown. Full-data TF-IDF is deterministic, so the uncertainty is test-set luck: 95% bootstrap [0.745, 0.779]." role="group" aria-label="Slide 3 of 14: TF-IDF + LR reaches 0.763 on test; 0.620 with 750 labels" aria-hidden="true">
+    <p class="kicker">3 · Baseline on the frozen test set</p><h1>TF-IDF + LR reaches 0.763 on test; 0.620 with 750 labels</h1><div class="body"><div class="cols c2-narrow" style="flex:0 0 auto">
     <div>
       <table class=""><thead><tr><th>System</th><th class="num">Test macro-F1</th><th class="num">OFF P</th><th class="num">OFF R</th><th class="num">Spread</th></tr></thead><tbody><tr><td>Always “not offensive”</td><td class="num">0.444</td><td class="num">—</td><td class="num">0.000</td><td class="num">deterministic</td></tr><tr><td>TF-IDF + LR, 750</td><td class="num">0.620 ± 0.012</td><td class="num">—</td><td class="num">—</td><td class="num">sd over 10 samples</td></tr><tr><td>TF-IDF + LR, 30,000</td><td class="num">0.763</td><td class="num">0.589</td><td class="num">0.673</td><td class="num">95% CI [0.745, 0.779]</td></tr></tbody></table>
       <p class="small muted" style="margin-top:10px">The frozen test set was scored once for this deterministic baseline.
@@ -198,9 +207,9 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
   </div>
   <p class="small" style="margin-top:8px">Lesson: false alarms cluster on conflict and club vocabulary and character n-grams; misses cluster on implicit insults and masked profanity. About one in seven audited errors is label noise, so the ceiling is below 1.0.</p></div>
   </section>
-<section class="slide " id="s5" data-page="5 of 14"
+<section class="slide center-body" id="s5" data-page="5 of 14"
     data-notes="Both arms are implemented. The LLM never writes: we read the probability of A versus B at the answer token. The eight examples come from the same 750 tweets, and the other 742 choose the threshold." role="group" aria-label="Slide 5 of 14: Both arms run end-to-end; first dev numbers" aria-hidden="true">
-    <p class="kicker">5 · Method status</p><h1>Both arms run end-to-end; first dev numbers</h1><div class="body"><div class="cols c2-wide">
+    <p class="kicker">5 · Method status</p><h1>Both arms run end-to-end; first dev numbers</h1><div class="body"><div class="cols c2-wide" style="flex:0 0 auto">
     <div>
       <div class="panel" style="margin-bottom:14px"><p class="small"><strong>Controlled change:</strong> baseline trains weights on the 750 labels; the LLM uses the
       identical 750 labels to pick 8 examples and a threshold. Nothing else differs except how labels are used.</p></div>
@@ -245,17 +254,17 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
   </div>
   <div class="panel" style="margin-top:8px;flex:0 0 auto;border-color:#fecaca"><p class="small">This is threshold geometry, not proof of contamination. It does not isolate pretraining language from alignment; the exact-completion check is still planned.</p></div></div>
   </section>
-<section class="slide " id="s8" data-page="8 of 14"
+<section class="slide center-body" id="s8" data-page="8 of 14"
     data-notes="The cost view: scoring throughput, wall time, load time and peak memory. Few-shot is much slower because the prompt repeats eight examples. TF-IDF is orders of magnitude cheaper." role="group" aria-label="Slide 8 of 14: One dev pass on an L4: 3–5 tweets/s with examples, 10–18 without" aria-hidden="true">
     <p class="kicker">8 · Cost and throughput</p><h1>One dev pass on an L4: 3–5 tweets/s with examples, 10–18 without</h1><div class="body"><table class="compact"><thead><tr><th>System</th><th class="num">Params</th><th class="num">Dev scoring</th><th class="num">Throughput</th><th class="num">Peak VRAM</th><th class="num">Notes</th></tr></thead><tbody><tr><td>TF-IDF, 750</td><td class="num">—</td><td class="num">0.6 s</td><td class="num">~3,100/s</td><td class="num">CPU</td><td class="num">fit 1.0 s</td></tr><tr><td>TF-IDF, 30,000</td><td class="num">—</td><td class="num">0.6 s</td><td class="num">~3,100/s</td><td class="num">CPU</td><td class="num">fit 14.6 s</td></tr><tr><td>Qwen3-8B, few-shot</td><td class="num">8.2B</td><td class="num">355 s</td><td class="num">5.0/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Gemma-2-9B, few-shot</td><td class="num">9.2B</td><td class="num">430 s</td><td class="num">4.1/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Qwen3-14B, few-shot</td><td class="num">14.8B</td><td class="num">644 s</td><td class="num">2.7/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Gemma-4-12B, few-shot</td><td class="num">12.0B</td><td class="num">579 s</td><td class="num">3.0/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Qwen3-14B, zero-shot</td><td class="num">14.8B</td><td class="num">180 s</td><td class="num">9.8/s</td><td class="num">10.7 GB</td><td class="num">load 157 s · 1,290 tok/s</td></tr></tbody></table>
   <p class="small" style="margin-top:10px">Scoring the 1,756 dev tweets; model download/load excluded unless stated. Few-shot is 3–4× slower because each prompt adds 8 examples (~600 tokens).</p>
   <p class="small muted">BERTurk: 35 s training at 750 labels, ~29 min at 30,000. Gemma-4-26B-A4B exceeded 22 GB and could not load on L4. Reported runs: 8.8 Colab units (~2.3 L4-hours).</p></div>
   </section>
-<section class="slide " id="s9" data-page="9 of 14"
+<section class="slide center-body" id="s9" data-page="9 of 14"
     data-notes="Ablation A isolates Turkish-only pretraining: BERTurk 0.767 vs XLM-R 0.670, gap +0.097. Ablation B isolates instruction language. Test opens only after methods freeze." role="group" aria-label="Slide 9 of 14: BERTurk and Ablation A are done; remaining steps have a date" aria-hidden="true">
-    <p class="kicker">9 · Plan to the final</p><h1>BERTurk and Ablation A are done; remaining steps have a date</h1><div class="body"><div class="cols c2-wide">
+    <p class="kicker">9 · Plan to the final</p><h1>BERTurk and Ablation A are done; remaining steps have a date</h1><div class="body"><div class="cols c2-wide" style="flex:0 0 auto">
     <div>
-      <table class="compact"><thead><tr><th>Date</th><th class="num">Experiment</th><th class="num">Status</th></tr></thead><tbody><tr><td>12 Nov</td><td class="num">Mid-project talk; freeze this deck</td><td class="num">today</td></tr><tr><td>13–16 Nov</td><td class="num">BERTurk 750 (10) + 30,000 (3) on dev</td><td class="num">done</td></tr><tr><td>17–20 Nov</td><td class="num">Ablation A: BERTurk vs XLM-R, 750</td><td class="num">done</td></tr><tr><td>21–24 Nov</td><td class="num">Ablation B: Gemma with English instructions</td><td class="num">planned</td></tr><tr><td>25–27 Nov</td><td class="num">Test-contamination check, 200 test tweets</td><td class="num">planned</td></tr><tr><td>28–30 Nov</td><td class="num">Freeze methods; open test; final runs</td><td class="num">planned</td></tr><tr><td>1–5 Dec</td><td class="num">Paired bootstrap, error analysis, paper</td><td class="num">planned</td></tr><tr><td>8 Dec</td><td class="num">Final report</td><td class="num">planned</td></tr></tbody></table>
+      <table class="compact plan-table"><thead><tr><th>Date</th><th class="num">Experiment</th><th class="num">Status</th></tr></thead><tbody><tr><td>12 Nov</td><td class="num">Mid-project talk; freeze this deck</td><td class="num">today</td></tr><tr><td>13–16 Nov</td><td class="num">BERTurk 750 (10) + 30,000 (3) on dev</td><td class="num">done</td></tr><tr><td>17–20 Nov</td><td class="num">Ablation A: BERTurk vs XLM-R, 750</td><td class="num">done</td></tr><tr><td>21–24 Nov</td><td class="num">Ablation B: Gemma with English instructions</td><td class="num">planned</td></tr><tr><td>25–27 Nov</td><td class="num">Test-contamination check, 200 test tweets</td><td class="num">planned</td></tr><tr><td>28–30 Nov</td><td class="num">Freeze methods; open test; final runs</td><td class="num">planned</td></tr><tr><td>1–5 Dec</td><td class="num">Paired bootstrap, error analysis, paper</td><td class="num">planned</td></tr><tr><td>8 Dec</td><td class="num">Final report</td><td class="num">planned</td></tr></tbody></table>
     </div>
     <div>
       <div class="panel" style="border-color:#fecaca;margin-bottom:12px"><h2 class="red">Biggest risk</h2>
@@ -270,19 +279,19 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
 <section class="slide " id="s10" data-page="10 of 14"
     data-notes="Close with the three numbers: baseline floor on test, strongest calibrated LLM on dev, and BERTurk on dev. The final answer uses the frozen test set and paired bootstrap." role="group" aria-label="Slide 10 of 14: What we know, what we do not, and what comes next" aria-hidden="true">
     <p class="kicker">10 · Takeaways</p><h1>What we know, what we do not, and what comes next</h1><div class="body"><div class="cols c3" style="flex:1">
-    <div class="panel center"><div class="stat amber">0.763</div><p>TF-IDF test macro-F1 at 30,000 labels; at 750 labels it falls to 0.620 ± 0.012.</p></div>
-    <div class="panel center"><div class="stat violet">0.790</div><p>Gemma-4-12B dev macro-F1 after calibration; zero-shot 0.763. Qwen3-14B reaches 0.773.</p></div>
-    <div class="panel center"><div class="stat teal">0.767</div><p>BERTurk-750 dev (10 runs); 30,000 labels reaches 0.832. It beats Qwen3-8B and Gemma-2-9B, but Gemma-4-12B leads on dev.</p></div>
+    <div class="panel center"><div class="stat-label">Baseline · test</div><div class="stat amber">0.763</div><p>TF-IDF test macro-F1 at 30,000 labels; at 750 labels it falls to 0.620 ± 0.012. Deterministic; test 95% CI [0.745, 0.779].</p></div>
+    <div class="panel center"><div class="stat-label">Best LLM · dev</div><div class="stat violet">0.790</div><p>Gemma-4-12B dev macro-F1 after calibration; zero-shot 0.763. Qwen3-14B reaches 0.773. Threshold from 742 labels; 3 runs.</p></div>
+    <div class="panel center"><div class="stat-label">Fine-tune · dev</div><div class="stat teal">0.767</div><p>BERTurk-750 dev (10 runs); 30,000 labels reaches 0.832. It beats Qwen3-8B and Gemma-2-9B, but Gemma-4-12B leads on dev. Gap to Gemma-4-12B: −0.023.</p></div>
   </div>
   <p class="small muted" style="margin-top:12px">What we do not have yet: any test-set method result. BERTurk-750 is 0.767 on dev; the final answer uses test. Pre-registered before results: the frozen test set, macro-F1, the 0.02 minimum gap, and the paired bootstrap.</p>
   <p class="strong" style="text-align:center;margin-top:8px">Questions welcome — any member can answer any part.</p></div>
   </section>
-<section class="slide " id="s11" data-page="11 of 14"
+<section class="slide appendix" id="s11" data-page="11 of 14"
     data-notes="Project Card fields 1-3. Abstract under 150 words with the one marked gap." role="group" aria-label="Slide 11 of 14: Fields 1–3: title and abstract, research question, contributions" aria-hidden="true">
     <p class="kicker">Project Card · appendix (graded, not presented)</p><h1>Fields 1–3: title and abstract, research question, contributions</h1><div class="body"><div class="panel" style="margin-bottom:12px"><h2>1 · Title and abstract</h2>
     <p class="small"><strong>Working title:</strong> Fine-tuning BERTurk vs threshold-calibrated open LLMs for Turkish offensive language with 750 labels.</p>
     <p class="small">Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. The LLM arm scores each tweet as log P(A) − log P(B); the 742 labels set its threshold. On dev, calibration moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from 0.412 to 0.500; Qwen3-14B reaches 0.773 (zero-shot 0.171) and Gemma-4-12B 0.790 ± 0.007 (zero-shot 0.763). Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels. [GAP: BERTurk-750 vs LLM test result, after the freeze.]</p></div>
-  <div class="cols c2">
+  <div class="cols c2" style="flex:0 0 auto">
     <div class="panel"><h2>2 · Research question</h2><p class="small">Unchanged. With 750 labels, does fine-tuning BERTurk beat prompting Gemma-2-9B-it or Qwen3-8B using the same 750 tweets (8 examples, 742 threshold labels) on macro-F1 over the official 3,528-tweet test set?</p>
       <p class="small"><strong>“No” result:</strong> BERTurk’s mean over 10 runs is not ≥0.02 above the LLM’s mean over 3 runs, or the paired bootstrap says chance (p ≥ 0.05). <strong>Change:</strong> none.</p></div>
     <div class="panel"><h2 class="violet">3 · Contributions</h2><p class="small"><strong>C1.</strong> At 750 labels, BERTurk’s mean test macro-F1 is ≥0.02 above each LLM’s, and a paired bootstrap rejects chance. Test pending; on dev BERTurk 0.767 vs 0.628 / 0.500.</p>
@@ -292,7 +301,7 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
   </section>
 <section class="slide " id="s12" data-page="12 of 14"
     data-notes="Fields 4-5. Eight references with the specific gap; data counts after the fixed split." role="group" aria-label="Slide 12 of 14: Fields 4–5: related work and data" aria-hidden="true">
-    <p class="kicker">Project Card · appendix</p><h1>Fields 4–5: related work and data</h1><div class="body"><div class="cols c2">
+    <p class="kicker">Project Card · appendix</p><h1>Fields 4–5: related work and data</h1><div class="body"><div class="cols c2 top">
     <div class="panel"><h2>4 · Related work</h2>
       <ol class="small" style="padding-left:20px">
         <li><strong>Zampieri et al. 2020</strong>, SemEval-2020 Task 12. Top Turkish systems fine-tune on full data; no label-budget comparison.</li>
@@ -310,9 +319,9 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
       <p class="small" style="margin-top:8px">9 duplicate train texts; 1 test/train overlap. Example (OFF, id 33518): “Kırmızı ağır karar Allah belanı versin”.</p></div>
   </div></div>
   </section>
-<section class="slide " id="s13" data-page="13 of 14"
+<section class="slide appendix" id="s13" data-page="13 of 14"
     data-notes="Fields 6-9. Baseline and method, protocol, full results table, error analysis summary." role="group" aria-label="Slide 13 of 14: Fields 6–9: method, protocol, results so far, error analysis" aria-hidden="true">
-    <p class="kicker">Project Card · appendix</p><h1>Fields 6–9: method, protocol, results so far, error analysis</h1><div class="body"><div class="cols c2">
+    <p class="kicker">Project Card · appendix</p><h1>Fields 6–9: method, protocol, results so far, error analysis</h1><div class="body"><div class="cols c2" style="flex:0 0 auto">
     <div class="panel"><h2>6 · Method and baseline</h2><p class="small">TF-IDF word 1–2 + char_wb 2–5, min_df=2, sublinear, Turkish lowercasing; LR C=1.0, balanced. Test 0.763 [0.745, 0.779].</p>
       <p class="small">Fine-tuning: BERTurk/XLM-R, 128 tokens, batch 16, 2e-5, 4 epochs or 400 updates, class-weighted, no early stopping. LLM: Qwen/Gemma 4-bit, 8 examples, 742-label threshold. One change: labels train weights vs choose examples and threshold.</p>
       <p class="small">Compute: 2.4 GPU-h fine-tuning (46 runs) + 2.5 L4-h for 16 LLM passes.</p></div>
@@ -326,12 +335,12 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
   <div class="panel" style="margin-top:10px"><h2>9 · Error analysis — 60 audited of 275</h2>
     <p class="small">False alarms: no insult 9; political/religious 10; sports 5; personal 3; sarcasm 1; label noise 2. Misses: implicit insult 8; masked profanity 5; veiled threat 3; political/religious 4; institutional/sports 3; label noise 7. One example per category is in results/errors/audit.json.</p></div></div>
   </section>
-<section class="slide " id="s14" data-page="14 of 14"
+<section class="slide appendix center-body" id="s14" data-page="14 of 14"
     data-notes="Fields 10-12. Both research leads wrote their sections. Ablation A complete. Roles TBD." role="group" aria-label="Slide 14 of 14: Fields 10–12: research lead, plan and risk, reproducibility" aria-hidden="true">
     <p class="kicker">Project Card · appendix</p><h1>Fields 10–12: research lead, plan and risk, reproducibility</h1><div class="body"><div class="panel" style="margin-bottom:10px"><h2>10 · Research lead section — Vesile Han (CSE 654), fine-tuning; Gürkan Göztepeli (CSE 654), prompting</h2>
     <p class="small"><strong>Vesile Han.</strong> Pecher et al., EMNLP 2025: English break-even near 100 labels, more for two-class tasks and variance; we test Turkish noisy two-class. Schmitt & Schweter, SindBERT 2025: Turkish encoders, full data only; no LLMs. Ablation A (done): BERTurk 0.767 vs XLM-R 0.670, +0.097 [0.080, 0.116], 100% wins. KUISAIL published BERTurk 0.816 on test; our 30k run should reproduce.</p>
     <p class="small"><strong>Gürkan Göztepeli.</strong> Şeker et al., HATECAT-TR 2025: BERTurk 0.59 vs LLaMA-3.3-70B 0.53 on Turkish hate spans; we classify whole tweets and score probabilities. Karakaş & Şimşek 2026: zero-shot LLMs vs BERTurk at one size; we add examples, calibration, curve. Ablation B: Gemma English instructions, 3 runs.</p></div>
-  <div class="cols c2">
+  <div class="cols c2" style="flex:0 0 auto">
     <div class="panel"><h2>11 · Plan and risk</h2><p class="small">Done: BERTurk 750 (10) + 30k (3), Ablation A (10). 21–24 Nov: Ablation B. 25–27 Nov: contamination check. 28–30 Nov: freeze, open test, final runs. 1–5 Dec: bootstrap, error analysis, paper. 8 Dec: report. Owners to be confirmed.</p>
       <p class="small"><strong>Biggest risk:</strong> 26B+ may not fit L4; Gemma-4-26B OOM’d at 22 GB, so 12B used. Fallback: Qwen3-14B alone. <strong>Result risk:</strong> lines may never cross; 750-label answer stands.</p></div>
     <div class="panel"><h2>12 · Reproducibility</h2><p class="small">Repository: github.com/paysis/offenseval-tr-midproject. One command: <code>bash scripts/reproduce.sh gpu</code>. Seeds: split 42, subsets 42+k, bootstrap 42. Versions: Python 3.13.16, scikit-learn 1.9.1, transformers 5.22.1, torch 2.14.1, bitsandbytes 4-bit NF4.</p>
