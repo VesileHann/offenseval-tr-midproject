@@ -2,7 +2,6 @@
 
 - `Team10_MidProject.pdf` — submission file (14 pages: 10 talk + 4 Project Card appendix).
 - `Team10_MidProject.html` — redesigned, self-contained fixed-stage web deck (works offline after fonts cache).
-- `Team10_MidProject_legacy.*` — previous deck, kept for reference only.
 
 ## Source
 
