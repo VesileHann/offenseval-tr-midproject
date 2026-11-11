@@ -52,9 +52,15 @@ are used: to update weights (BERTurk) or to choose examples and a threshold
   10 runs each, to test whether Turkish-only pretraining explains BERTurk.
 - **Ablation B (planned):** Gemma-2-9B with English instructions, same examples
   and threshold method, 3 runs, to test instruction-language sensitivity.
-- **Scale check (done):** Qwen3-8B/14B and Gemma-2-9B/Gemma-4-12B under the
-  identical 8+742 protocol. This tests whether a stronger multilingual model
-  closes the gap without fine-tuning.
+- **Scale check (done, extra analysis):** Qwen3-8B/14B and Gemma-2-9B/Gemma-4-12B
+  under the identical 8+742 protocol. This tests whether a stronger multilingual
+  model closes the gap without fine-tuning.
+
+**Formal comparison (decided 11 Nov 2026, before the test set opens).** The
+falsification rule above is applied only to Gemma-2-9B-it and Qwen3-8B, the two
+LLMs named in the proposal. Qwen3-14B and Gemma-4-12B were added after the first
+dev results, so they are reported as extra analysis with the same metric and
+bootstrap, but they do not decide the answer.
 
 ## Statistics
 

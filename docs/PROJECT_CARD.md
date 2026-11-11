@@ -16,8 +16,12 @@ macro-F1 over the official 3,528-tweet test set?
 **“No” result:** against either LLM, BERTurk’s mean over 10 runs is not ≥0.02 higher than the
 LLM’s mean over 3 runs, or the paired bootstrap says the gap could be chance (p ≥ 0.05).
 
-**Change:** none. The data and method forced no change; the mid-project rubric added a test-set
-baseline, reported separately, which does not alter the question.
+**Change:** the question is unchanged, but two stronger LLMs (Qwen3-14B, Gemma-4-12B) were added
+after the first dev results. Decided on 11 Nov 2026, before the test set opens: the formal test
+(0.02 gap, paired bootstrap) compares BERTurk only with Gemma-2-9B and Qwen3-8B, the two LLMs in
+the proposal; the new models are reported as extra analysis. Compute changed from free Colab T4
+to paid Colab Pro L4, for speed. The mid-project rubric added a test-set baseline, reported
+separately, which does not alter the question.
 
 ## 3. Contributions
 
