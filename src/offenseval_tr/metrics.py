@@ -71,3 +71,24 @@ def best_threshold(y, scores) -> tuple[float, float]:
         if f > best_f:
             best_t, best_f = float(t), f
     return best_t, float(best_f)
+
+
+def paired_bootstrap_runs(y, runs_a, runs_b, n: int = 10_000, seed: int = SEED, chunk: int = 500):
+    """Paired bootstrap for mean macro-F1 over runs: system A (runs_a) minus system B (runs_b).
+
+    runs_a, runs_b: one prediction array per run, all on the same rows as y.
+    Every run is scored on the same resampled rows. Returns
+    (observed_gap, one_sided_lower_95, win_rate, two_sided_95_interval).
+    """
+    y = _as_bool(y)
+    a = np.stack([_as_bool(p) for p in runs_a]); b = np.stack([_as_bool(p) for p in runs_b])
+    rng = np.random.default_rng(seed)
+    gaps = []
+    for start in range(0, n, chunk):
+        idx = rng.integers(0, len(y), (min(chunk, n - start), len(y)))
+        yy = y[idx][:, None, :]
+        gaps.append(macro_f1_rows(yy, a[:, idx].transpose(1, 0, 2)).mean(1)
+                    - macro_f1_rows(yy, b[:, idx].transpose(1, 0, 2)).mean(1))
+    gaps = np.concatenate(gaps)
+    observed = float(np.mean([macro_f1(y, p) for p in a]) - np.mean([macro_f1(y, p) for p in b]))
+    return observed, float(np.percentile(gaps, 5)), float((gaps > 0).mean()), [float(v) for v in np.percentile(gaps, [2.5, 97.5])]

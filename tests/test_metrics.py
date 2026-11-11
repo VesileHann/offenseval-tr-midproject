@@ -1,6 +1,6 @@
 import numpy as np
 
-from offenseval_tr.metrics import best_threshold, bootstrap_ci, macro_f1, paired_bootstrap
+from offenseval_tr.metrics import best_threshold, bootstrap_ci, macro_f1, paired_bootstrap, paired_bootstrap_runs
 
 
 def test_macro_f1_perfect_and_majority():
@@ -31,3 +31,14 @@ def test_bootstrap_and_paired_shapes():
     assert 0.99 <= lo <= hi <= 1.0
     mean_gap, lower, wins = paired_bootstrap(y, p, ["NOT"] * 40, n=200)
     assert mean_gap > 0.4 and lower > 0 and wins > 0.9
+
+
+def test_paired_bootstrap_runs_matches_single_run_case():
+    rng = np.random.default_rng(0)
+    y = rng.random(300) < 0.2
+    good = [np.where(rng.random(300) < 0.9, y, ~y) for _ in range(3)]
+    bad = [rng.random(300) < 0.2 for _ in range(3)]
+    gap, lower, wins, (lo, hi) = paired_bootstrap_runs(y, good, bad, n=500)
+    assert gap > 0.2 and lower > 0 and wins > 0.99 and lo <= gap <= hi
+    gap0, lower0, _, _ = paired_bootstrap_runs(y, good, good, n=200)
+    assert gap0 == 0 and lower0 == 0
