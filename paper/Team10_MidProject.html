@@ -492,8 +492,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 <div class="deck-viewport">
   <main class="deck-stage" id="deckStage">
 
-<!-- notes: We start with the question. We have 750 labelled Turkish tweets. We can fine-tune BERTurk on them, or prompt an open LLM with 8 examples and use the other 742 labels to set its threshold. Both are scored with macro-F1 on the frozen 3,528-tweet test set. We call the answer no if BERTurk's average over 10 runs is less than 0.02 above the LLM's average over 3 runs, or if the paired bootstrap says the gap could be chance. All three numbers use the same 750 labels on dev: 0.613 for TF-IDF, 0.767 for BERTurk-750 and 0.790 for the best LLM. On the frozen test set TF-IDF-750 scores 0.620. -->
-<section class="slide title-slide" id="s1" data-page="1" data-notes="We start with the question. We have 750 labelled Turkish tweets. We can fine-tune BERTurk on them, or prompt an open LLM with 8 examples and use the other 742 labels to set its threshold. Both are scored with macro-F1 on the frozen 3,528-tweet test set. We call the answer no if BERTurk's average over 10 runs is less than 0.02 above the LLM's average over 3 runs, or if the paired bootstrap says the gap could be chance. All three numbers use the same 750 labels on dev: 0.613 for TF-IDF, 0.767 for BERTurk-750 and 0.790 for the best LLM. On the frozen test set TF-IDF-750 scores 0.620." role="group" aria-label="Slide 1 of 14: With 750 labelled tweets, does fine‑tuning beat a calibrated open LLM?">
+<!-- notes: We start with the question. We have 750 labelled Turkish tweets. We can fine-tune BERTurk on them, or prompt an open LLM with 8 examples and use the other 742 labels to set its threshold. Both are scored with macro-F1 on the frozen 3,528-tweet test set. We call the answer no if BERTurk's average over 10 runs is less than 0.02 above the LLM's average over 3 runs, or if the paired bootstrap says the gap could be chance. All three numbers use the same 750 labels on dev: 0.613 for TF-IDF, 0.767 for BERTurk-750 and 0.790 for the best LLM. On the frozen test set TF-IDF-750 scores 0.620. The formal test compares BERTurk only with the two LLMs named in the proposal, Gemma-2-9B and Qwen3-8B. Qwen3-14B and Gemma-4-12B were added after we saw the first dev results, so we report them as extra analysis. -->
+<section class="slide title-slide" id="s1" data-page="1" data-notes="We start with the question. We have 750 labelled Turkish tweets. We can fine-tune BERTurk on them, or prompt an open LLM with 8 examples and use the other 742 labels to set its threshold. Both are scored with macro-F1 on the frozen 3,528-tweet test set. We call the answer no if BERTurk's average over 10 runs is less than 0.02 above the LLM's average over 3 runs, or if the paired bootstrap says the gap could be chance. All three numbers use the same 750 labels on dev: 0.613 for TF-IDF, 0.767 for BERTurk-750 and 0.790 for the best LLM. On the frozen test set TF-IDF-750 scores 0.620. The formal test compares BERTurk only with the two LLMs named in the proposal, Gemma-2-9B and Qwen3-8B. Qwen3-14B and Gemma-4-12B were added after we saw the first dev results, so we report them as extra analysis." role="group" aria-label="Slide 1 of 14: With 750 labelled tweets, does fine‑tuning beat a calibrated open LLM?">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">Team 10 · CSE 484 / CSE 654 · Mid-project · 12 November 2026</span>
@@ -502,18 +502,19 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <h1 class="slide-title">With 750 labelled tweets, does fine‑tuning beat a calibrated open LLM?</h1>
     <div class="slide-body"><div class="hero-grid">
     <div class="hero-q">
-      <div class="label cobalt">Research question · unchanged</div>
+      <div class="label cobalt">Research question · unchanged · formal test: the two proposal LLMs</div>
       <p class="lead">Take <strong>750 labelled OffensEval-TR tweets</strong>. Fine-tune <strong>BERTurk</strong>, or prompt <strong>Gemma-2-9B-it</strong> or <strong>Qwen3-8B</strong> with 8 examples from those 750 and use the other 742 to set a decision threshold. Compare <strong>macro-F1</strong> on the frozen 3,528-tweet test set.</p>
     </div>
     <div class="no-card">
       <div class="label red">We call it a no when</div>
       <p>BERTurk’s mean over 10 runs is less than <strong>0.02</strong> above the LLM’s mean over 3 runs, or a paired bootstrap says the gap could be chance.</p>
+      <p class="source" style="margin-top:10px">Applies to Gemma-2-9B and Qwen3-8B only. Qwen3-14B and Gemma-4-12B were added after the first dev results and are reported as extra analysis.</p>
     </div>
   </div>
   <div class="stat-strip">
     <div class="stat"><span class="stat-num amber">0.613</span><span class="stat-cap">TF-IDF-750<br>dev, 10 runs</span></div>
     <div class="stat"><span class="stat-num teal">0.767</span><span class="stat-cap">BERTurk-750<br>dev, 10 runs</span></div>
-    <div class="stat"><span class="stat-num violet">0.790</span><span class="stat-cap">Gemma-4-12B<br>dev, calibrated</span></div>
+    <div class="stat"><span class="stat-num violet">0.790</span><span class="stat-cap">Gemma-4-12B<br>dev, extra analysis</span></div>
     <div class="stat"><span class="stat-num">60</span><span class="stat-cap">baseline errors<br>audited</span></div>
   </div>
   <p class="byline">Vesile Han · Gürkan Göztepeli <span class="muted">(CSE 654, research leads)</span> · Mert Uğur · Utku Gökçek <span class="muted">(CSE 484)</span></p></div>
@@ -762,8 +763,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <h1 class="slide-title">What we know, what we do not, and what comes next</h1>
     <div class="slide-body"><div class="takeaway-grid">
     <div class="takeaway"><div class="label amber">Baseline · 750 labels</div><div class="takeaway-num amber">0.613</div><p>TF-IDF dev macro-F1 with the same 750 labels (10 runs); 0.620 ± 0.012 on the frozen test set. With 30,000 labels it reaches 0.763 on test (95% CI [0.745, 0.779]).</p></div>
-    <div class="takeaway"><div class="label violet">Best LLM · dev</div><div class="takeaway-num violet">0.790</div><p>Gemma-4-12B dev macro-F1 after calibration; zero-shot 0.763. Qwen3-14B reaches 0.773. Threshold from 742 labels; 3 runs.</p></div>
-    <div class="takeaway"><div class="label teal">Fine-tune · dev</div><div class="takeaway-num teal">0.767</div><p>BERTurk-750 dev (10 runs); 30,000 labels reaches 0.832. It beats Qwen3-8B and Gemma-2-9B, but Gemma-4-12B leads on dev. Gap to Gemma-4-12B: −0.023.</p></div>
+    <div class="takeaway"><div class="label violet">Best LLM · dev · extra analysis</div><div class="takeaway-num violet">0.790</div><p>Gemma-4-12B dev macro-F1 after calibration; zero-shot 0.763. Qwen3-14B reaches 0.773. Threshold from 742 labels; 3 runs.</p></div>
+    <div class="takeaway"><div class="label teal">Fine-tune · dev</div><div class="takeaway-num teal">0.767</div><p>BERTurk-750 dev (10 runs); 30,000 labels reaches 0.832. It beats Qwen3-8B and Gemma-2-9B, the two LLMs in the formal test. Gemma-4-12B (extra analysis) leads on dev by 0.023.</p></div>
   </div>
   <div class="note-band single">
     <p><strong>Still missing:</strong> test-set scores for both arms. Everything above is dev; the final verdict uses the frozen 3,528-tweet test set. Four decisions were fixed before any method ran: the test split, macro-F1, the 0.02 minimum gap, and a paired bootstrap over 10,000 resamples to check that the gap is not chance.</p>
@@ -790,7 +791,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <div class="panel">
       <div class="label">2 · Research question</div>
       <p>Unchanged. With 750 labels, does fine-tuning BERTurk beat prompting Gemma-2-9B-it or Qwen3-8B (same 750 tweets, 8 examples plus 742 threshold labels) on macro-F1 over the official 3,528-tweet test set?</p>
-      <p><strong>“No” result:</strong> BERTurk’s mean over 10 runs is not ≥0.02 above the LLM’s mean over 3 runs, or the paired bootstrap says chance (p ≥ 0.05). <strong>Change:</strong> none.</p>
+      <p><strong>“No” result:</strong> BERTurk’s mean over 10 runs is not ≥0.02 above the LLM’s mean over 3 runs, or the paired bootstrap says chance (p ≥ 0.05). <strong>Change:</strong> Qwen3-14B and Gemma-4-12B were added after the first dev results; the formal test (0.02 gap, paired bootstrap) uses only Gemma-2-9B and Qwen3-8B, and the new models are extra analysis. Compute: paid Colab Pro L4 instead of free T4.</p>
     </div>
     <div class="panel">
       <div class="label violet">3 · Contributions</div>
