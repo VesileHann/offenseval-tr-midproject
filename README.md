@@ -21,8 +21,8 @@ complete. BERTurk-750 is pending and will be added before the final report.
 | TF-IDF + LR, 750 labels | — | 0.613 ± 0.015 | — | 10 |
 | Qwen3-8B | 0.162 | 0.628 ± 0.034 | +0.466 | 3 |
 | Gemma-2-9B | 0.412 | 0.500 ± 0.048 | +0.088 | 3 |
-| Qwen3-14B | 0.171 | **0.778 ± 0.001** | +0.607 | 2 |
-| **Gemma-4-12B** | **0.763** | **0.794 ± 0.004** | +0.031 | 2 |
+| Qwen3-14B | 0.171 | **0.778 ± 0.001** | +0.607 | 3 |
+| **Gemma-4-12B** | **0.763** | **0.794 ± 0.004** | +0.031 | 3 |
 
 **Frozen test baseline:** TF-IDF with 30,000 labels reaches **0.763** macro-F1
 (95% bootstrap CI [0.745, 0.779]); with 750 labels it reaches 0.620 ± 0.012.
@@ -41,7 +41,7 @@ until the final freeze.
   `log P(A) − log P(B)` at the first answer token. The threshold maximises
   macro-F1 on the other 742 labelled tweets and is applied once to dev.
 - **Protocol:** macro-F1; 10 BERTurk runs at 250/750/2,000 labels and 3 at
-  6,000/30,000; 3 LLM runs (2 for the stronger pair); paired bootstrap with
+  6,000/30,000; 3 LLM runs per model; paired bootstrap with
   10,000 resamples; a gap counts only if it is at least 0.02 and BERTurk wins on
   at least 95% of resamples.
 
@@ -118,6 +118,12 @@ uv run python scripts/collect_results.py
 Models: `qwen3-8b`, `gemma-2-9b`, `qwen3-14b`, `gemma-4-12b`,
 `gemma-4-26b-a4b` (does not fit a 24 GB L4). Runs write one JSON and one score
 CSV per run, so a lost session costs one run, not the experiment.
+
+## Contributing
+
+See `CONTRIBUTING.md` for branch/PR rules, the result schema and the CI
+commands. Teammates work on branches and open pull requests; `main` is kept
+reproducible.
 
 ## Data and licence
 
