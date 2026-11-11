@@ -5,19 +5,7 @@
 **Working title:** Fine-tuning BERTurk vs threshold-calibrated open LLMs for Turkish offensive
 language with 750 labels.
 
-Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk
-on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt
-examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression
-baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. We
-implemented the LLM arm end-to-end: Qwen3-8B and Gemma-2-9B score each tweet as
-log P(A) − log P(B), and the threshold is chosen on the 742 held-out labels. On dev, calibration
-moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from
-0.412 to 0.500; stronger multilingual models reach
-0.773 (Qwen3-14B; zero-shot 0.171) and 0.790 ± 0.007 (Gemma-4-12B), and Gemma-4
-already scores 0.763 zero-shot. Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels.
-**[GAP: BERTurk-750 vs LLM test result, after the freeze.]**
-The final paper reports the paired bootstrap gap and the label count at which fine-tuning
-overtakes the LLM line.
+Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. The LLM arm scores each tweet as log P(A) − log P(B); the 742 labels set its threshold. On dev, calibration moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from 0.412 to 0.500; Qwen3-14B reaches 0.773 (zero-shot 0.171) and Gemma-4-12B 0.790 ± 0.007 (zero-shot 0.763). Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels. [GAP: BERTurk-750 vs LLM test result, after the freeze.] The final paper reports the paired bootstrap gap and the label count at which fine-tuning overtakes the LLM line.
 
 ## 2. Research question
 
