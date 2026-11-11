@@ -1,0 +1,104 @@
+{
+  "sample": 60,
+  "sampling": "30 per direction, pandas sample(random_state=42)",
+  "false_OFF_total": 166,
+  "missed_OFF_total": 109,
+  "categories": [
+    {
+      "direction": "false_OFF",
+      "category": "F1 No insult; spurious word/char cue",
+      "count": 9,
+      "example_id": "12420",
+      "example": "#TeamBieber sizce JB5'in ad\u0131 ne olabilir? ... tahminlerinizi yaz\u0131n.",
+      "gloss": "A fan poll: no insult at all; a character n-gram cue fired."
+    },
+    {
+      "direction": "false_OFF",
+      "category": "F2 Political or religious criticism",
+      "count": 10,
+      "example_id": "35124",
+      "example": "H\u0131rs\u0131z tabloyu \u00e7alarken I\u015f\u0131k\u2019lar\u0131 yakan ev sahibi gibisin \u0130mamo\u011flu...",
+      "gloss": "A political accusation (\u201clike a thief\u201d), labelled NOT."
+    },
+    {
+      "direction": "false_OFF",
+      "category": "F3 Sports criticism or banter",
+      "count": 5,
+      "example_id": "13105",
+      "example": "Aziz Y\u0131ld\u0131r\u0131m Fenerbah\u00e7e'yi padi\u015fahl\u0131k zannediyor herhalde...",
+      "gloss": "Club criticism without a slur."
+    },
+    {
+      "direction": "false_OFF",
+      "category": "F4 Personal criticism not judged offensive",
+      "count": 3,
+      "example_id": "22409",
+      "example": "Ger\u00e7ek hesap oldu\u011funu sanm\u0131yorum. b\u00f6yle fake hesaplar\u0131 da sevmiyorum...",
+      "gloss": "Mild personal criticism."
+    },
+    {
+      "direction": "false_OFF",
+      "category": "F5 Sarcasm or irony",
+      "count": 1,
+      "example_id": "28737",
+      "example": "Ha bi sen eksiktin ba\u015fka g\u00fcn m\u00fc yok",
+      "gloss": "Sarcasm with no offensive word."
+    },
+    {
+      "direction": "false_OFF",
+      "category": "F6 Label noise or genuinely ambiguous",
+      "count": 2,
+      "example_id": "33218",
+      "example": "... Seni cehennem paklar Zebaniler sana gereken cevabi verir",
+      "gloss": "A curse; the NOT label is questionable."
+    },
+    {
+      "direction": "missed_OFF",
+      "category": "M1 Implicit insult, no profanity",
+      "count": 8,
+      "example_id": "43325",
+      "example": "ailenin bile kar\u0131\u015fmad\u0131\u011f\u0131 \u015feylere s\u00fcrekli muhalefet olan akraba.. bundan daha parazit canl\u0131 t\u00fcr\u00fc yok",
+      "gloss": "\u201cNo more parasitic species\u201d \u2014 an insult with no swear word."
+    },
+    {
+      "direction": "missed_OFF",
+      "category": "M2 Masked or abbreviated profanity",
+      "count": 5,
+      "example_id": "15069",
+      "example": "Bangtan\u0131n kazanmad\u0131\u011f\u0131 bi bakanl\u0131k se\u00e7imi kald\u0131 amkk ...",
+      "gloss": "\u201camkk\u201d is a masked swear; the token is unseen."
+    },
+    {
+      "direction": "missed_OFF",
+      "category": "M3 Veiled threat or violence",
+      "count": 3,
+      "example_id": "35789",
+      "example": "... burada da bi tane derin devlet travestisi var ben de onu idam edicem elime ge\u00e7irirsem",
+      "gloss": "An insult plus a threat."
+    },
+    {
+      "direction": "missed_OFF",
+      "category": "M4 Political or religious insult",
+      "count": 4,
+      "example_id": "25929",
+      "example": "Gerici yobazlar taraf\u0131ndan katledilen Devrim \u015eehidimiz Kubilay\u2019\u0131 ... an\u0131yoruz",
+      "gloss": "\u201cBigoted reactionaries\u201d \u2014 a political insult."
+    },
+    {
+      "direction": "missed_OFF",
+      "category": "M6 Institutional or sports criticism",
+      "count": 3,
+      "example_id": "20333",
+      "example": "\u00d6sym e\u011fer kontrol ediyorsan yorulma ... bir kurum ancak bu kadar milletine g\u00fcvenmeyebilir",
+      "gloss": "Institutional criticism; the OFF label is a stretch."
+    },
+    {
+      "direction": "missed_OFF",
+      "category": "M7 Label noise or not offensive",
+      "count": 7,
+      "example_id": "10001",
+      "example": "Ne bileyim sen hastay\u0131m deyince bende veteriner okumaya karar verdim",
+      "gloss": "A joke; no offence."
+    }
+  ]
+}
