@@ -317,7 +317,7 @@ table { width: 100%; border-collapse: collapse; }
 .plan-table td { padding: 7px 8px; }
 .plan-table td:nth-child(1), .plan-table th:nth-child(1) { white-space: nowrap; }
 .plan-table td:nth-child(2), .plan-table th:nth-child(2) { text-align: left; }
-.plan-table td:nth-child(3), .plan-table th:nth-child(3) { font-family: var(--font-mono); font-size: .9em; }
+.plan-table td:nth-child(3), .plan-table th:nth-child(3) { width: 20%; font-family: var(--font-mono); font-size: .9em; }
 .source { font-family: var(--font-mono); font-size: 15px; line-height: 1.45; color: var(--muted); margin-top: 12px; }
 .caption { font-family: var(--font-mono); font-size: 13px; line-height: 1.4; color: var(--muted); margin-top: 10px; }
 
@@ -382,7 +382,7 @@ ul.tight li { margin-bottom: 12px; font-size: 21px; line-height: 1.32; }
 .panel.wide { grid-column: 1 / -1; }
 .working-title { font-family: var(--font-display); font-size: 24px; line-height: 1.2; margin-bottom: 10px; }
 .refs { padding-left: 22px; }
-.refs li { margin-bottom: 9px; font-size: 18px; line-height: 1.32; }
+.refs li { margin-bottom: 7px; font-size: 16.5px; line-height: 1.28; }
 .result-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 code { font-family: var(--font-mono); font-size: .9em; background: rgba(23,21,15,.06); padding: 1px 5px; }
 
@@ -733,7 +733,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <h1 class="slide-title">Done: BERTurk and Ablation A. Every remaining step has a date and an owner</h1>
     <div class="slide-body"><div class="split-62">
     <div>
-      <table class="data-table plan-table"><thead><tr><th>Date</th><th class="num">Experiment</th><th class="num">Owner</th><th class="num">Status</th></tr></thead><tbody><tr><td>11 Nov</td><td class="num">BERTurk 750 (10) + 30,000 (3) on dev</td><td class="num">Mert</td><td class="num">done</td></tr><tr><td>11 Nov</td><td class="num">Ablation A: BERTurk vs XLM-R, 750</td><td class="num">Vesile</td><td class="num">done</td></tr><tr><td>12 Nov</td><td class="num">Mid-project talk; freeze this deck</td><td class="num">All</td><td class="num">talk</td></tr><tr><td>21 to 24 Nov</td><td class="num">Ablation B: Gemma with English instructions</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>25 to 27 Nov</td><td class="num">Test-contamination check, first 200 test tweets</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>28 to 30 Nov</td><td class="num">Freeze methods; open test; final runs</td><td class="num">All</td><td class="num">planned</td></tr><tr><td>1 to 5 Dec</td><td class="num">Paired bootstrap, error analysis, paper</td><td class="num">Mert · Utku</td><td class="num">planned</td></tr><tr><td>8 Dec</td><td class="num">Final report</td><td class="num">All</td><td class="num">planned</td></tr></tbody></table>
+      <table class="data-table plan-table"><thead><tr><th>Date</th><th class="num">Experiment</th><th class="num">Owner</th><th class="num">Status</th></tr></thead><tbody><tr><td>11 Nov</td><td class="num">BERTurk 750 (10) + 30,000 (3) on dev</td><td class="num">Vesile · Mert</td><td class="num">done</td></tr><tr><td>11 Nov</td><td class="num">Ablation A: BERTurk vs XLM-R, 750</td><td class="num">Vesile</td><td class="num">done</td></tr><tr><td>12 Nov</td><td class="num">Mid-project talk; freeze this deck</td><td class="num">All</td><td class="num">talk</td></tr><tr><td>21 to 24 Nov</td><td class="num">Ablation B: Gemma with English instructions</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>25 to 27 Nov</td><td class="num">Test-contamination check, first 200 test tweets</td><td class="num">Gürkan · Utku</td><td class="num">planned</td></tr><tr><td>28 to 30 Nov</td><td class="num">Freeze methods; open test; final runs</td><td class="num">All</td><td class="num">planned</td></tr><tr><td>1 to 5 Dec</td><td class="num">Paired bootstrap and error analysis</td><td class="num">Mert · Utku</td><td class="num">planned</td></tr><tr><td>1 to 5 Dec</td><td class="num">Paper draft</td><td class="num">All</td><td class="num">planned</td></tr><tr><td>8 Dec</td><td class="num">Final report</td><td class="num">All</td><td class="num">planned</td></tr></tbody></table>
     </div>
     <div class="stack">
       <div class="risk-card red-edge">
@@ -818,14 +818,14 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <div class="panel">
       <div class="label">4 · Related work</div>
       <ol class="refs">
-        <li><strong>Zampieri et al. 2020</strong>, SemEval-2020 Task 12. Top Turkish systems fine-tune on full data; no label-budget comparison.</li>
-        <li><strong>Çöltekin 2020</strong>, LREC. The dataset; no fine-tuning-vs-prompting comparison.</li>
-        <li><strong>Zampieri et al. 2023</strong>, NLE. Zero-shot LLMs; Turkish only Flan-T5-large 0.451; no examples.</li>
-        <li><strong>Dehghan & Yanıkoğlu 2024</strong>, CASE. ChatGPT with 7 examples vs BERTurk, one dataset and one size.</li>
-        <li><strong>Pecher, Srba & Bielikova 2025</strong>, EMNLP. English break-even near 100 labels; we test noisy Turkish two-class data.</li>
-        <li><strong>Schmitt & Schweter 2025</strong>, SindBERT. Turkish encoders, full data only; no LLMs or small budgets.</li>
-        <li><strong>Şeker et al. 2025</strong>, HATECAT-TR. Turkish span hate; BERTurk 0.59 vs LLaMA-3.3-70B 0.53; we classify whole tweets.</li>
-        <li><strong>Karakaş & Şimşek 2026</strong>. Zero-shot LLMs vs BERTurk at one size; we add examples, calibration and a curve.</li>
+        <li><strong>Zampieri et al. 2020.</strong> “SemEval-2020 Task 12: Multilingual Offensive Language Identification in Social Media (OffensEval 2020).” SemEval. Top Turkish systems fine-tune on full data; no label-budget comparison.</li>
+        <li><strong>Çöltekin 2020.</strong> “A Corpus of Turkish Offensive Language.” LREC. The dataset; no fine-tuning-vs-prompting comparison.</li>
+        <li><strong>Zampieri et al. 2023.</strong> “OffensEval 2023: Offensive Language Identification in the Age of Large Language Models.” NLE. Zero-shot LLMs; Turkish only Flan-T5-large 0.451; no examples.</li>
+        <li><strong>Dehghan & Yanıkoğlu 2024.</strong> “Evaluating ChatGPT’s Ability to Detect Hate Speech in Turkish Tweets.” CASE, pp. 54-59. ChatGPT with 7 examples vs BERTurk, one dataset and one size.</li>
+        <li><strong>Pecher, Srba & Bielikova 2025.</strong> “Comparing Specialised Small and General Large Language Models on Text Classification.” EMNLP, pp. 165-184. English break-even near 100 labels; we test noisy Turkish two-class data.</li>
+        <li><strong>Schmitt & Schweter 2025.</strong> “SindBERT.” arXiv:2510.21364. Turkish encoders, full data only; no LLMs or small budgets.</li>
+        <li><strong>Şeker, Uludoğan, Önal & Özgür 2025.</strong> “HATECAT-TR.” Findings of EMNLP. Turkish span hate; BERTurk 0.59 vs LLaMA-3.3-70B 0.53; we classify whole tweets.</li>
+        <li><strong>Karakaş & Şimşek 2026.</strong> arXiv:2606.29614. Zero-shot LLMs vs BERTurk at one size; we add examples, calibration and a curve.</li>
       </ol>
     </div>
     <div class="panel">
@@ -852,7 +852,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
       <div class="label">6 · Method and baseline</div>
       <p>TF-IDF word 1-2 + char_wb 2-5, min_df=2, sublinear, Turkish lowercasing; LR C=1.0, balanced. Test 0.763 [0.745, 0.779].</p>
       <p>Fine-tuning: BERTurk/XLM-R, 128 tokens, batch 16, 2e-5, 4 epochs or 400 updates, class-weighted, no early stopping. LLM: Qwen/Gemma 4-bit, 8 examples, 742-label threshold. One change: labels train weights vs choose examples and threshold.</p>
-      <p>Compute: about 3 Colab units for the 46 fine-tuning runs + 2.5 L4-h for 16 LLM passes.</p>
+      <p>Compute used: about 3 Colab units for the 46 fine-tuning runs + 2.5 L4-h for 16 LLM passes; about 18 GPU-h needed for the final.</p>
       <div class="label" style="margin-top:18px">7 · Evaluation protocol</div>
       <p>Macro-F1; frozen 3,528-tweet test; 10 BERTurk runs at 250/750/2,000 and 3 at 6,000/30,000; 3 runs per LLM at 750. Paired bootstrap, 10,000 resamples; real gap ≥0.02 and wins on ≥95%. Fixed before method results; dev for code checks only.</p>
     </div>
@@ -886,13 +886,13 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     </div>
     <div class="panel">
       <div class="label">11 · Plan and risk</div>
-      <p>Done: BERTurk curve (36 runs), Ablation A (10). 21 to 24 Nov: Ablation B (Gürkan). 25 to 27 Nov: contamination check (Gürkan). 28 to 30 Nov: freeze, open test, final runs (all). 1 to 5 Dec: bootstrap, error analysis, paper (Mert · Utku). 8 Dec: report (all).</p>
+      <p>Done: BERTurk curve (36 runs), Ablation A (10). 21 to 24 Nov: Ablation B (Gürkan). 25 to 27 Nov: contamination check (Gürkan). 28 to 30 Nov: freeze, open test, final runs (all). 1 to 5 Dec: bootstrap and error analysis (Mert · Utku), paper draft (all). 8 Dec: report (all).</p>
       <p><strong>Biggest risk:</strong> 26B+ may not fit L4; Gemma-4-26B OOM’d at 22 GB, so 12B used. Fallback: Qwen3-14B alone. <strong>Result risk:</strong> lines may never cross; 750-label answer stands. <strong>Proposal feedback:</strong> add a test-set baseline; it is reported once, while methods stay on dev.</p>
     </div>
     <div class="panel">
       <div class="label">12 · Reproducibility</div>
       <p>Repository: github.com/paysis/offenseval-tr-midproject. One command: <code>bash scripts/reproduce.sh gpu</code>. Seeds: split 42, subsets 42+k, bootstrap 42. Versions: Python 3.13.16, scikit-learn 1.9.1, transformers 5.22.1, torch 2.14.1, bitsandbytes 4-bit NF4.</p>
-      <p><strong>Roles:</strong> to be confirmed before the final report. <strong>AI tools:</strong> a coding assistant was used for code, analysis and drafting; every number is read from saved result files and checked by the team.</p>
+      <p><strong>Roles:</strong> fine-tuning side, Vesile Han and Mert Uğur; prompting side, Gürkan Göztepeli and Utku Gökçek. Ablation A belongs to Vesile, Ablation B to Gürkan. <strong>AI tools:</strong> a coding assistant was used for code, analysis and drafting; every number is read from saved result files and checked by the team.</p>
     </div>
   </div></div>
     <footer class="slide-footer"><span>Team 10 · CSE 484 / CSE 654</span><span>Mid-project · 12 November 2026</span></footer>
