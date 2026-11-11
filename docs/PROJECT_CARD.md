@@ -5,7 +5,7 @@
 **Working title:** Fine-tuning BERTurk vs threshold-calibrated open LLMs for Turkish offensive
 language with 750 labels.
 
-Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. The LLM arm scores each tweet as log P(A) − log P(B); the 742 labels set its threshold. On dev, calibration moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from 0.412 to 0.500; Qwen3-14B reaches 0.773 (zero-shot 0.171) and Gemma-4-12B 0.790 ± 0.007 (zero-shot 0.763). Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels. [GAP: BERTurk-750 vs LLM test result, after the freeze.] The final paper reports the paired bootstrap gap and the label count at which fine-tuning overtakes the LLM line.
+Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. The LLM arm scores each tweet as log P(A) − log P(B); the 742 labels set its threshold. On dev, calibration moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from 0.412 to 0.500; Qwen3-14B reaches 0.773 (zero-shot 0.171) and Gemma-4-12B 0.790 ± 0.007 (zero-shot 0.763). Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels. The frozen-test comparison is pending; the final result uses the paired bootstrap. The final paper reports the paired bootstrap gap and the label count at which fine-tuning overtakes the LLM line.
 
 ## 2. Research question
 
@@ -21,13 +21,13 @@ baseline, reported separately, which does not alter the question.
 
 ## 3. Contributions
 
-- **C1.** At 750 labels, BERTurk’s mean test macro-F1 is at least 0.02 above each LLM’s, and a
-  paired bootstrap rejects chance. Core claim; test pending. On dev, BERTurk (0.767) is above
+- **C1.** At 750 labels, we test whether BERTurk’s mean test macro-F1 is at least 0.02 above each
+  LLM’s and whether a paired bootstrap rejects chance. Test pending. On dev, BERTurk (0.767) is above
   Qwen3-8B (0.628) and Gemma-2-9B (0.500).
 - **C2.** Choosing the threshold on the 742 non-example labels improves each LLM’s dev macro-F1
   over zero-shot by a measurable margin; we report the per-model delta and its run spread.
-- **C3.** The learning curve places the label count where fine-tuning overtakes the LLM line
-  between 250 and 6,000; if the lines never cross, the 750-label answer still stands.
+- **C3.** The learning curve tests where fine-tuning overtakes the LLM line between 250 and
+  6,000 labels; if the lines never cross, the 750-label answer still stands.
 
 ## 4. Related work
 
@@ -172,7 +172,7 @@ Repository: https://github.com/paysis/offenseval-tr-midproject. One command:
 Python 3.13.16 on Colab (3.14.8 local), scikit-learn 1.9.1, transformers 5.22.1, torch 2.14.1,
 bitsandbytes 4-bit NF4.
 
-**Roles:** not decided yet; the team will assign them.
+**Roles:** to be confirmed before the final report; the team will assign them.
 
 **AI tools:** a coding assistant was used for code, analysis and drafting; every number in this
 card is read from the saved result files and was checked by the team.

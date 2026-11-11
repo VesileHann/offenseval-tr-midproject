@@ -30,7 +30,7 @@ collect:
 	$(PY) scripts/collect_results.py
 
 test:
-	$(PY) -m pytest -q
+	uv run --extra dev python -m pytest -q
 
 reproduce:
 	bash scripts/reproduce.sh
