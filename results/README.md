@@ -10,8 +10,9 @@
 | `baseline/subsets.csv` | Shared training subsets, size × subset × id |
 | `errors/dev_errors.tsv` | All 275 dev errors |
 | `errors/audit.json` | 60-error audit: categories, counts, one example each |
-| `llm/<model>/` | One JSON and score CSV per run; JSON has threshold, F1 and timing |
+| `llm/<model>/` | One JSON plus dev and calibration score CSVs per run; the JSON has the threshold and F1, plus timing where the run recorded it |
 | `finetune/<model>/` | One JSON plus dev and test score CSVs per fine-tuning run (BERTurk, XLM-R-base) |
+| `zero_shot_diagnostics.json` | Zero-shot thresholds and score distributions: F1 at 0, best threshold, ROC-AUC |
 | `figures/` | Figures used in the deck |
 | `timing_tfidf.json`, `timing_from_logs.json` | CPU latency and per-pass GPU throughput |
 

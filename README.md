@@ -6,14 +6,13 @@ This repository contains the code, fixed data splits, saved predictions, error
 audit and reproduction scripts for our mid-project study on Turkish offensive
 language identification.
 
-**Question.** With only 750 labelled tweets, does fine-tuning BERTurk beat an
-open LLM that uses the same 750 labels — 8 as prompt examples and the other 742
-to choose its decision threshold — on macro-F1 over the official OffensEval-TR
-2020 test set?
+We ask whether fine-tuning BERTurk beats an open LLM that uses the same 750
+labels (8 as prompt examples and the other 742 to choose its decision
+threshold) on macro-F1 over the official OffensEval-TR 2020 test set.
 
-**Status.** Mid-project. The baseline, the no-fine-tuning LLM arm and the
+The project is mid-way. The baseline, the LLM arm without fine-tuning and the
 fine-tuning arm (BERTurk learning curve and Ablation A) are complete on dev.
-Method test scores wait for the final freeze.
+Test scores for the method arms wait for the final freeze.
 
 ## Key results (dev, 1,756 tweets)
 
@@ -38,7 +37,7 @@ above Qwen3-8B and Gemma-2-9B (the two LLMs named in the proposal) and below
 Qwen3-14B and Gemma-4-12B on dev. Ablation A: BERTurk − XLM-R = +0.097 (paired
 bootstrap over dev tweets, 95% CI [+0.080, +0.116]).
 
-**Frozen test baseline:** TF-IDF with 30,000 labels reaches **0.763** macro-F1
+The frozen test baseline scores TF-IDF with 30,000 labels at **0.763** macro-F1
 (95% bootstrap CI [0.745, 0.779]); with 750 labels it reaches 0.620 ± 0.012.
 The deterministic baseline was scored once on test; method results stay on dev
 until the final freeze.
@@ -56,7 +55,7 @@ until the final freeze.
   `log P(A) − log P(B)` at the first answer token. The threshold maximises
   macro-F1 on the other 742 labelled tweets and is applied once to dev.
 - **Protocol:** macro-F1; 10 BERTurk runs at 250/750/2,000 labels and 3 at
-  6,000/30,000; 3 LLM runs per model; paired bootstrap with
+  6,000/30,000; 3 few-shot runs per model and 1 zero-shot run; paired bootstrap with
   10,000 resamples; a gap counts only if it is at least 0.02 and BERTurk wins on
   at least 95% of resamples.
 
@@ -71,9 +70,9 @@ until the final freeze.
 | Gemma-4-12B, few-shot | 579 s | 3.0 tweets/s | — |
 | Qwen3-14B, zero-shot | 180 s | 9.8 tweets/s | 10.7 GB |
 
-Few-shot scoring is 3–4× slower than zero-shot because each prompt repeats eight
-examples (~600 tokens). Gemma-4-26B-A4B exceeds 22 GB on an L4 and is not
-runnable on that device.
+Few-shot scoring is 3 to 4 times slower than zero-shot because each prompt
+repeats eight examples (~600 tokens). Gemma-4-26B-A4B exceeds 22 GB on an L4
+and is not runnable on that device.
 
 ## Repository layout
 
@@ -90,15 +89,20 @@ scripts/                  thin command-line entry points
   extract_errors.py       275 dev errors + reproducible 60-error audit
   run_llm.py              zero-shot / few-shot calibration
   run_finetune.py         fine-tuning runs (learning curve, Ablation A)
+  zero_shot_diagnostics.py zero-shot thresholds and score distributions
   collect_results.py      aggregate results/summary.json
 results/
   baseline/               curves, ids, subsets, test predictions
-  llm/<model>/            one JSON + score CSV per run
+  llm/<model>/            one JSON + score CSVs per run
   finetune/<model>/       one JSON + dev/test score CSV per run
   errors/                 dev errors and audit
   figures/                deck figures
   summary.json            every number used in the report
-docs/                     method, results, error analysis, Project Card, team
+  zero_shot_diagnostics.json why calibration helps some models more
+  timing_tfidf.json       CPU fit and predict times
+  timing_from_logs.json   GPU pass times parsed from run logs
+docs/                     method, results, error analysis, result schema,
+                          reproducibility, Project Card, team, accessibility
 paper/                    Team10_MidProject.pdf + self-contained HTML deck
 tests/                    CPU-only unit tests
 ```
@@ -134,8 +138,9 @@ uv run python scripts/collect_results.py
 ```
 
 Models: `qwen3-8b`, `gemma-2-9b`, `qwen3-14b`, `gemma-4-12b`,
-`gemma-4-26b-a4b` (does not fit a 24 GB L4). Runs write one JSON and one score
-CSV per run, so a lost session costs one run, not the experiment.
+`gemma-4-26b-a4b` (does not fit a 24 GB L4). A run writes one JSON plus its
+dev and calibration score CSVs, so a lost session costs one run, not the
+experiment.
 
 ### Fine-tuning arm (GPU)
 
@@ -147,7 +152,7 @@ uv run python scripts/collect_results.py
 ```
 
 One run at 750 labels takes about 35 s of training on an L4; one at 30,000
-about 29 minutes (1,657–1,724 s across the three runs). Test predictions are saved in `*_test_scores.csv` but not scored.
+about 29 minutes (1,657 to 1,724 s across the three runs). Test predictions are saved in `*_test_scores.csv` but not scored.
 
 ## Contributing
 
@@ -158,7 +163,7 @@ reproducible.
 ## Data and licence
 
 - **Data:** [OffensEval-TR 2020](https://coltekin.github.io/offensive-turkish/),
-  Çöltekin, LREC 2020. Annotations are **CC BY 2.0**; the tweets remain subject
+  Çöltekin, LREC 2020. Annotations are CC BY 2.0; the tweets remain subject
   to Twitter/X terms. The data is not redistributed here.
 - **Code:** MIT (see `LICENSE`).
 - **Model licences:** Qwen3 (Apache 2.0), Gemma 2/4 (Apache 2.0; Gemma 2 access
@@ -169,7 +174,7 @@ reproducible.
 Team 10: Vesile Han, Gürkan Göztepeli, Mert Uğur, Utku Gökçek.
 Task ownership will be finalized by the team before the final report.
 
-**AI disclosure.** A coding assistant was used for code, analysis and drafting.
+AI disclosure: a coding assistant was used for code, analysis and drafting.
 Every number in `results/summary.json` is generated by the scripts in this
 repository and was checked by the team.
 
