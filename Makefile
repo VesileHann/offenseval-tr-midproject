@@ -1,6 +1,6 @@
 PY ?= uv run python
 
-.PHONY: install baseline test audit llm collect test-all clean
+.PHONY: install baseline test audit llm finetune collect test-all clean
 
 install:
 	uv venv
@@ -19,6 +19,11 @@ llm:
 	$(PY) scripts/run_llm.py --model qwen3-8b   --mode zeroshot --runs 1 --batch 8
 	$(PY) scripts/run_llm.py --model gemma-2-9b --mode fewshot  --runs 3 --batch 8
 	$(PY) scripts/run_llm.py --model gemma-2-9b --mode zeroshot --runs 1 --batch 8
+	$(PY) scripts/collect_results.py
+
+finetune:
+	$(PY) scripts/run_finetune.py --model berturk --sizes 250 750 2000 6000 30000
+	$(PY) scripts/run_finetune.py --model xlmr-base --sizes 750
 	$(PY) scripts/collect_results.py
 
 collect:
