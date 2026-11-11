@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "offenseval-tr"
+version = "0.1.0"
+description = "Fine-tuning vs threshold-calibrated open LLMs for Turkish offensive language with 750 labels"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Team 10" }]
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.1",
+  "scipy>=1.11",
+  "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+llm = ["torch>=2.3", "transformers>=4.51", "accelerate>=0.30", "bitsandbytes>=0.43"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

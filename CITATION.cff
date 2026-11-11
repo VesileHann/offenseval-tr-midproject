@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+title: "Fine-tuning vs threshold-calibrated open LLMs for Turkish offensive language with 750 labels"
+message: "If you use this code, please cite the repository and the thesis project."
+type: software
+authors:
+  - family-names: Han
+    given-names: Vesile
+  - family-names: Göztepeli
+    given-names: Gürkan
+  - family-names: Uğur
+    given-names: Mert
+  - family-names: Gökçek
+    given-names: Utku
+year: 2026
+license: MIT
+repository-code: "https://github.com/paysis/offenseval-tr-midproject"
