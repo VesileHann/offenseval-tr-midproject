@@ -146,8 +146,8 @@ uv run python scripts/run_finetune.py --model xlmr-base --sizes 750
 uv run python scripts/collect_results.py
 ```
 
-One run at 750 labels takes about 35 s of training on an L4; one at 30,000 about
-11 minutes. Test predictions are saved in `*_test_scores.csv` but not scored.
+One run at 750 labels takes about 35 s of training on an L4; one at 30,000
+about 29 minutes (1,657–1,724 s across the three runs). Test predictions are saved in `*_test_scores.csv` but not scored.
 
 ## Contributing
 
