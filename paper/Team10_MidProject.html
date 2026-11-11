@@ -5,7 +5,7 @@
 <style>:root {
   --bg: #ffffff; --fg: #111827; --muted: #4b5563; --panel: #f3f4f6;
   --line: #d1d5db; --accent: #006b78; --violet: #6a4fc9; --amber: #b45309;
-  --red: #b91c1c; --teal: #007f8f; --shadow: 0 1px 2px rgba(0,0,0,.06);
+  --red: #b91c1c; --teal: #006b78; --shadow: 0 1px 2px rgba(0,0,0,.06);
 }
 [data-theme="dark"] {
   --bg: #0b1220; --fg: #f8fafc; --muted: #cbd5e1; --panel: #162033;
@@ -114,7 +114,7 @@ img.chart { display: block; width: 100%; height: auto; max-height: 100%; object-
 </style>
 </head><body>
 <a class="sr-only" href="#s1">Skip to first slide</a>
-<div class="bar" role="progressbar" aria-label="Slide progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+<section class="chrome" aria-label="Slide progress"><div class="bar" role="progressbar" aria-label="Slide progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></section>
 <main class="deck" aria-live="polite"><section class="slide spread" id="s1" data-page="1 of 14"
     data-notes="Research question first. The answer is no under two pre-registered conditions: a gap below 0.02 macro-F1, or a paired bootstrap that cannot rule out chance. Test-set baseline only; method results on dev." role="group" aria-label="Slide 1 of 14: With 750 labelled tweets, does fine-tuning beat a calibrated open LLM?" >
     <p class="kicker">Team 10 · CSE 484 / 654 · Mid-project, 12 November 2026</p><h1>With 750 labelled tweets, does fine-tuning beat a calibrated open LLM?</h1><div class="body"><div class="cols c2-wide" style="flex:0 0 auto">
@@ -335,13 +335,13 @@ img.chart { display: block; width: 100%; height: auto; max-height: 100%; object-
       <p class="small"><strong>Roles:</strong> not decided yet. <strong>AI tools:</strong> a coding assistant was used for code, analysis and drafting; every number is read from saved result files and checked by the team.</p></div>
   </div></div>
   </section></main>
-<div class="toolbar" role="toolbar" aria-label="Presentation controls">
+<nav class="toolbar" aria-label="Presentation controls">
   <button type="button" data-act="prev" aria-label="Previous slide">←</button>
   <button type="button" data-act="next" aria-label="Next slide">→</button>
   <button type="button" data-act="theme" aria-label="Toggle dark mode">◐</button>
   <button type="button" data-act="full" aria-label="Full screen">⛶</button>
   <button type="button" data-act="presenter" aria-label="Open presenter view">P</button>
-</div>
+</nav>
 <p class="sr-only" id="status" aria-live="polite"></p>
 <script>(() => {
   const deck = document.querySelector(".deck");
