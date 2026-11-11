@@ -1,0 +1,127 @@
+{
+  "g4_fewshot": [
+    {
+      "n": 742,
+      "seconds": 245.3,
+      "tweets_per_s": 3.024
+    },
+    {
+      "n": 1756,
+      "seconds": 579.3,
+      "tweets_per_s": 3.031
+    },
+    {
+      "n": 742,
+      "seconds": 227.1,
+      "tweets_per_s": 3.268
+    },
+    {
+      "n": 1756,
+      "seconds": 531.0,
+      "tweets_per_s": 3.307
+    },
+    {
+      "n": 742,
+      "seconds": 272.9,
+      "tweets_per_s": 2.719
+    }
+  ],
+  "g4_zeroshot": [
+    {
+      "n": 1756,
+      "seconds": 156.8,
+      "tweets_per_s": 11.199
+    }
+  ],
+  "gemma_fewshot": [
+    {
+      "n": 742,
+      "seconds": 182.3,
+      "tweets_per_s": 4.07
+    },
+    {
+      "n": 1756,
+      "seconds": 430.1,
+      "tweets_per_s": 4.082
+    },
+    {
+      "n": 742,
+      "seconds": 174.2,
+      "tweets_per_s": 4.261
+    },
+    {
+      "n": 1756,
+      "seconds": 407.1,
+      "tweets_per_s": 4.313
+    },
+    {
+      "n": 742,
+      "seconds": 209.8,
+      "tweets_per_s": 3.536
+    },
+    {
+      "n": 1756,
+      "seconds": 497.6,
+      "tweets_per_s": 3.529
+    }
+  ],
+  "gemma_zeroshot": [
+    {
+      "n": 1756,
+      "seconds": 112.1,
+      "tweets_per_s": 15.665
+    }
+  ],
+  "q14_fewshot": [
+    {
+      "n": 742,
+      "seconds": 274.9,
+      "tweets_per_s": 2.699
+    },
+    {
+      "n": 1756,
+      "seconds": 643.7,
+      "tweets_per_s": 2.728
+    }
+  ],
+  "q14_zeroshot": [],
+  "qwen_fewshot": [
+    {
+      "n": 742,
+      "seconds": 149.8,
+      "tweets_per_s": 4.953
+    },
+    {
+      "n": 1756,
+      "seconds": 354.6,
+      "tweets_per_s": 4.952
+    },
+    {
+      "n": 742,
+      "seconds": 149.8,
+      "tweets_per_s": 4.953
+    },
+    {
+      "n": 1756,
+      "seconds": 350.6,
+      "tweets_per_s": 5.009
+    },
+    {
+      "n": 742,
+      "seconds": 175.3,
+      "tweets_per_s": 4.232
+    },
+    {
+      "n": 1756,
+      "seconds": 413.1,
+      "tweets_per_s": 4.25
+    }
+  ],
+  "qwen_zeroshot": [
+    {
+      "n": 1756,
+      "seconds": 95.4,
+      "tweets_per_s": 18.407
+    }
+  ]
+}
