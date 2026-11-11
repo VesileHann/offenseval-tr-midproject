@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Aggregate baseline, error-audit and LLM runs into results/summary.json."""
+"""Aggregate baseline, error-audit, LLM and fine-tuning runs into results/summary.json."""
 import glob
 import json
 import os
@@ -7,6 +7,8 @@ from collections import defaultdict
 
 import numpy as np
 import pandas as pd
+
+from offenseval_tr.metrics import paired_bootstrap_runs
 
 
 def main():
@@ -28,6 +30,7 @@ def main():
         "tfidf_30000_test": test["tfidf_30000"],
         "error_audit": audit,
         "llm": {},
+        "finetune": {},
     }
     groups = defaultdict(list)
     for path in sorted(glob.glob(f"{root}/llm/*/*.json")):
@@ -41,9 +44,30 @@ def main():
             "thresholds": [r["threshold"] for r in runs],
             "cal": [r["cal_macro_f1"] for r in runs],
         }
+    ft = defaultdict(list)
+    for path in sorted(glob.glob(f"{root}/finetune/*/n*_run*.json")):
+        run = json.load(open(path))
+        ft[(run["model"], run["size"])].append(run)
+    for (model, size), runs in sorted(ft.items()):
+        runs.sort(key=lambda r: r["run"])
+        values = [r["dev_macro_f1"] for r in runs]
+        summary["finetune"][f"{model}_{size}"] = {
+            "model": model, "size": size, "n_runs": len(runs), "mean": float(np.mean(values)),
+            "sd": float(np.std(values, ddof=1)) if len(values) > 1 else 0.0,
+            "off_recall": float(np.mean([r["dev_off_recall"] for r in runs])),
+            "single_class_runs": sum(r["single_class"] for r in runs), "dev_macro_f1": values,
+        }
+    # Ablation A on dev: BERTurk vs XLM-R-base on the same 750-label subsets.
+    if ("berturk", 750) in ft and ("xlmr-base", 750) in ft:
+        def preds(model):
+            return [pd.read_csv(f"{root}/finetune/{model}/n750_run{r['run']}_dev_scores.csv").pred.to_numpy()
+                    for r in ft[(model, 750)]]
+        labels = pd.read_csv(f"{root}/finetune/berturk/n750_run1_dev_scores.csv").label.to_numpy()
+        gap, lower, wins, interval = paired_bootstrap_runs(labels, preds("berturk"), preds("xlmr-base"))
+        summary["ablation_a_dev"] = {"gap": gap, "one_sided_lower_95": lower, "win_rate": wins, "ci95": interval}
     with open(f"{root}/summary.json", "w") as f:
         json.dump(summary, f, indent=2)
-    print(f"wrote {root}/summary.json with {len(summary['llm'])} LLM groups")
+    print(f"wrote {root}/summary.json with {len(summary['llm'])} LLM and {len(summary['finetune'])} fine-tuning groups")
 
 
 if __name__ == "__main__":

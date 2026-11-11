@@ -1,0 +1,22 @@
+{
+  "model": "berturk",
+  "hf_id": "dbmdz/bert-base-turkish-cased",
+  "size": 30000,
+  "run": 2,
+  "seed": 44,
+  "n_dev": 1756,
+  "dev_macro_f1": 0.8288676941,
+  "dev_off_precision": 0.7606557377,
+  "dev_off_recall": 0.6843657817,
+  "single_class": false,
+  "steps": 7500,
+  "timing": {
+    "train_s": 1656.8,
+    "gpu": "NVIDIA L4"
+  },
+  "versions": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "transformers": "5.22.1"
+  }
+}

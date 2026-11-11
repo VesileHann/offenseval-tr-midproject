@@ -1,0 +1,22 @@
+{
+  "model": "xlmr-base",
+  "hf_id": "FacebookAI/xlm-roberta-base",
+  "size": 750,
+  "run": 9,
+  "seed": 51,
+  "n_dev": 1756,
+  "dev_macro_f1": 0.659198713,
+  "dev_off_precision": 0.57,
+  "dev_off_recall": 0.3362831858,
+  "single_class": false,
+  "steps": 400,
+  "timing": {
+    "train_s": 124.4,
+    "gpu": "NVIDIA L4"
+  },
+  "versions": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "transformers": "5.22.1"
+  }
+}
