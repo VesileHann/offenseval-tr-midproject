@@ -21,7 +21,7 @@ Test scores for the method arms wait for the final freeze.
 | TF-IDF + LR, 750 labels | — | 0.613 ± 0.015 | — | 10 |
 | Qwen3-8B | 0.162 | 0.628 ± 0.034 | +0.466 | 3 |
 | Gemma-2-9B | 0.412 | 0.500 ± 0.048 | +0.088 | 3 |
-| Qwen3-14B | 0.171 | **0.773 ± 0.010** | +0.602 | 3 |
+| Qwen3-14B | 0.171 | **0.773 ± 0.009** | +0.602 | 3 |
 | **Gemma-4-12B** | **0.763** | **0.790 ± 0.007** | +0.027 | 3 |
 
 **Fine-tuning arm (dev):**
@@ -152,7 +152,10 @@ uv run python scripts/collect_results.py
 ```
 
 One run at 750 labels takes about 35 s of training on an L4; one at 30,000
-1,657 to 1,724 s (about 29 minutes) with the three runs sharing one L4; alone it is about 11 minutes (7,500 updates at the 0.087 s/update measured at 750 labels). Test predictions are saved in `*_test_scores.csv` but not scored.
+took 1,657 to 1,724 s (about 29 minutes) because the three runs shared one
+L4. Alone, a run takes about 11 minutes (7,500 updates at the 0.087 s/update
+measured at 750 labels). Test predictions are saved in `*_test_scores.csv`
+but not scored.
 
 ## Contributing
 
