@@ -20,7 +20,7 @@ body { font-family: Carlito, Calibri, "Segoe UI", system-ui, sans-serif; color: 
   transform-origin: center center; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
 body.presenting { overflow: hidden; display: grid; place-items: center; }
 body.presenting .deck { box-shadow: none; }
-.slide { position: absolute; inset: 0; padding: 38px 52px 44px; display: none; flex-direction: column;
+.slide { position: absolute; inset: 0; padding: 38px 64px 52px; display: none; flex-direction: column;
   background: var(--bg); color: var(--fg); overflow: hidden; }
 .slide.active { display: flex; }
 .slide::after { content: attr(data-page); position: absolute; right: 42px; bottom: 20px;
@@ -123,6 +123,17 @@ img.chart { background: #fff; padding: 6px; border-radius: 8px; }
 .plan-table td:nth-child(1), .plan-table th:nth-child(1) { width: 15%; white-space: nowrap; }
 .plan-table td:nth-child(3), .plan-table th:nth-child(3) { width: 12%; text-align: right; }
 .stat-label { font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+
+/* Fields 6-9: keep the error-analysis panel clear of the bottom edge. */
+#s13 .body { gap: 10px; }
+#s13 .cols { gap: 12px; }
+#s13 .panel { padding: 12px 15px; }
+#s13 .panel h2 { margin-bottom: 5px; }
+#s13 .panel p { margin-bottom: 5px; }
+#s13 .body > .panel { margin-top: 0 !important; }
+#s13 table.tiny-table th, #s13 table.tiny-table td { padding: 2px 4px; }
+#s7 .body { gap: 10px; }
+#s7 .body > .panel:last-child p { font-size: 14.5px; }
 </style>
 </head><body>
 <a class="sr-only" href="#s1">Skip to first slide</a>
