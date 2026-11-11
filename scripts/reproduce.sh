@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Reproduce the mid-project numbers.
 #   bash scripts/reproduce.sh        # CPU: data, split, baselines, error audit
-#   bash scripts/reproduce.sh gpu    # + LLM runs (needs HF_TOKEN and a GPU)
+#   bash scripts/reproduce.sh gpu    # + LLM and fine-tuning runs (needs HF_TOKEN and a GPU)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=${PYTHON:-python}
@@ -20,6 +20,8 @@ if [[ "${1:-}" == "gpu" ]]; then
     $PY scripts/run_llm.py --model "$model" --mode fewshot  --runs 3 --batch 6
     $PY scripts/run_llm.py --model "$model" --mode zeroshot --runs 1 --batch 8
   done
+  $PY scripts/run_finetune.py --model berturk --sizes 250 750 2000 6000 30000
+  $PY scripts/run_finetune.py --model xlmr-base --sizes 750
 fi
 
 $PY scripts/collect_results.py
