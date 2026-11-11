@@ -5,7 +5,7 @@
 **Working title:** Fine-tuning BERTurk vs threshold-calibrated open LLMs for Turkish offensive
 language with 750 labels.
 
-Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. The LLM arm scores each tweet as log P(A) − log P(B); the 742 labels set its threshold. On dev, calibration moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from 0.412 to 0.500; Qwen3-14B reaches 0.773 (zero-shot 0.171) and Gemma-4-12B 0.790 ± 0.007 (zero-shot 0.763). Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels. The frozen-test comparison is pending; the final result uses the paired bootstrap. The final paper reports the paired bootstrap gap and the label count at which fine-tuning overtakes the LLM line.
+Small Turkish platforms can label only a few hundred tweets. We ask whether fine-tuning BERTurk on 750 labelled OffensEval-TR tweets beats an open LLM that uses the same 750 labels as 8 prompt examples and 742 calibration tweets for its decision threshold. The TF-IDF + logistic-regression baseline scores 0.763 macro-F1 on the frozen 3,528-tweet test set, but 0.620 with 750 labels. The LLM arm scores each tweet as log P(A) − log P(B); the 742 labels set its threshold. On dev, calibration moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from 0.412 to 0.500; Qwen3-14B reaches 0.773 (zero-shot 0.171) and Gemma-4-12B 0.790 ± 0.007 (zero-shot 0.763). Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels. **Gap:** the frozen-test comparison is pending; the final result uses the paired bootstrap. The final paper reports the paired bootstrap gap and the label count at which fine-tuning overtakes the LLM line.
 
 ## 2. Research question
 
@@ -161,7 +161,7 @@ Owners to be confirmed.
 
 **Biggest risk:** a 26B+ model may not fit the L4; Gemma-4-26B-A4B OOM’d at 22 GB, so we
 used the 12B dense model. **Fallback:** Qwen3-14B alone. **Result risk:** the lines may never cross; the 750-label
-answer still stands. **Contamination:** give each LLM the first 200 test tweets and report exact
+answer still stands. **Contamination:** give each LLM the first 100 test tweets and report exact
 completions. **Proposal feedback:** the rubric asked for a test-set baseline; we scored the
 deterministic baseline once and kept methods on dev.
 
