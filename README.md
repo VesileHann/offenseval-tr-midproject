@@ -21,8 +21,8 @@ complete. BERTurk-750 is pending and will be added before the final report.
 | TF-IDF + LR, 750 labels | — | 0.613 ± 0.015 | — | 10 |
 | Qwen3-8B | 0.162 | 0.628 ± 0.034 | +0.466 | 3 |
 | Gemma-2-9B | 0.412 | 0.500 ± 0.048 | +0.088 | 3 |
-| Qwen3-14B | 0.171 | **0.778 ± 0.001** | +0.607 | 3 |
-| **Gemma-4-12B** | **0.763** | **0.794 ± 0.004** | +0.031 | 3 |
+| Qwen3-14B | 0.171 | **0.773 ± 0.010** | +0.602 | 3 |
+| **Gemma-4-12B** | **0.763** | **0.790 ± 0.007** | +0.027 | 3 |
 
 **Frozen test baseline:** TF-IDF with 30,000 labels reaches **0.763** macro-F1
 (95% bootstrap CI [0.745, 0.779]); with 750 labels it reaches 0.620 ± 0.012.

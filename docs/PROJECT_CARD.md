@@ -13,7 +13,7 @@ implemented the LLM arm end-to-end: Qwen3-8B and Gemma-2-9B score each tweet as
 log P(A) − log P(B), and the threshold is chosen on the 742 held-out labels. On dev, calibration
 moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from
 0.412 to 0.500; stronger multilingual models reach
-0.778 (Qwen3-14B; zero-shot 0.171) and 0.794 ± 0.004 (Gemma-4-12B), and Gemma-4
+0.773 (Qwen3-14B; zero-shot 0.171) and 0.790 ± 0.007 (Gemma-4-12B), and Gemma-4
 already scores 0.763 zero-shot. **[GAP: BERTurk-750 test result, pending.]**
 The final paper reports the paired bootstrap gap and the label count at which fine-tuning
 overtakes the LLM line.
@@ -92,7 +92,7 @@ options, 8 examples (4+4), score log P(A) − log P(B); threshold maximises macr
 
 **One change vs baseline:** labels train weights vs choose prompt examples and a threshold.
 
-**Compute used / needed:** about 2.3 L4-hours (8.8 Colab units) for 14 LLM passes; about 18 GPU-hours needed
+**Compute used / needed:** about 2.5 L4-hours (9.4 Colab units) for 16 LLM passes; about 18 GPU-hours needed
 for the final (proposal estimate), free Colab only.
 
 ## 7. Evaluation protocol
@@ -113,9 +113,9 @@ the mean gap is ≥0.02. Fixed before method results; dev is for code checks onl
 | Gemma-2-9B zero-shot | 0.412 | — |
 | Gemma-2-9B calibrated | 0.500 ± 0.048 | — |
 | Qwen3-14B zero-shot | 0.171 | — |
-| Qwen3-14B calibrated | 0.778 ± 0.001 | — |
+| Qwen3-14B calibrated | 0.773 ± 0.009 | — |
 | Gemma-4-12B zero-shot | 0.763 | — |
-| Gemma-4-12B calibrated | 0.794 ± 0.004 | — |
+| Gemma-4-12B calibrated | 0.790 ± 0.007 | — |
 | BERTurk, 750 | running | — |
 
 ## 9. Error analysis
