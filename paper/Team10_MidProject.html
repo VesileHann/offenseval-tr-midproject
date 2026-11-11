@@ -565,7 +565,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <h1 class="slide-title">TF-IDF + LR reaches 0.763 on test; 0.620 with 750 labels</h1>
     <div class="slide-body"><div class="split-55">
     <div>
-      <table class="data-table nowrap-first"><thead><tr><th>System</th><th class="num">Test macro-F1</th><th class="num">OFF P</th><th class="num">OFF R</th><th class="num">Spread</th></tr></thead><tbody><tr><td>Always NOT</td><td class="num">0.444</td><td class="num">—</td><td class="num">0.000</td><td class="num">deterministic</td></tr><tr><td>TF-IDF + LR, 750</td><td class="num">0.620 ± 0.012</td><td class="num">—</td><td class="num">—</td><td class="num">sd over 10 samples</td></tr><tr><td>TF-IDF + LR, 30,000</td><td class="num">0.763</td><td class="num">0.589</td><td class="num">0.673</td><td class="num">95% CI [0.745, 0.779]</td></tr></tbody></table>
+      <table class="data-table nowrap-first"><thead><tr><th>System</th><th class="num">Test macro-F1</th><th class="num">OFF P</th><th class="num">OFF R</th><th class="num">Spread</th></tr></thead><tbody><tr><td>Always NOT</td><td class="num">0.444</td><td class="num">n/a</td><td class="num">0.000</td><td class="num">deterministic</td></tr><tr><td>TF-IDF + LR, 750</td><td class="num">0.620 ± 0.012</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">sd over 10 samples</td></tr><tr><td>TF-IDF + LR, 30,000</td><td class="num">0.763</td><td class="num">0.589</td><td class="num">0.673</td><td class="num">95% CI [0.745, 0.779]</td></tr></tbody></table>
       <p class="source">The frozen test set was scored once for this deterministic baseline. All method results stay on dev until the final freeze.</p>
       <div class="callout"><span class="big-num amber">0.620</span><span>test at 750 labels<br><span class="muted">0.613 on dev</span></span></div>
     </div>
@@ -594,8 +594,8 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     </header>
     <h1 class="slide-title">275 dev errors; a 60-error audit shows where a word model fails</h1>
     <div class="slide-body"><div class="two-col">
-    <table class="data-table compact-table"><thead><tr><th>False alarms (166) — category</th><th class="num">n</th></tr></thead><tbody><tr><td>No insult; spurious word/char cue</td><td class="num">9</td></tr><tr><td>Political or religious criticism</td><td class="num">10</td></tr><tr><td>Sports criticism or banter</td><td class="num">5</td></tr><tr><td>Personal criticism not judged offensive</td><td class="num">3</td></tr><tr><td>Sarcasm or irony</td><td class="num">1</td></tr><tr><td>Label noise or genuinely ambiguous</td><td class="num">2</td></tr></tbody></table>
-    <table class="data-table compact-table"><thead><tr><th>Missed offensive (109) — category</th><th class="num">n</th></tr></thead><tbody><tr><td>Implicit insult, no profanity</td><td class="num">8</td></tr><tr><td>Masked or abbreviated profanity</td><td class="num">5</td></tr><tr><td>Veiled threat or violence</td><td class="num">3</td></tr><tr><td>Political or religious insult</td><td class="num">4</td></tr><tr><td>Institutional or sports criticism</td><td class="num">3</td></tr><tr><td>Label noise or not offensive</td><td class="num">7</td></tr></tbody></table>
+    <table class="data-table compact-table"><thead><tr><th>False alarms (166): category</th><th class="num">n</th></tr></thead><tbody><tr><td>No insult; spurious word/char cue</td><td class="num">9</td></tr><tr><td>Political or religious criticism</td><td class="num">10</td></tr><tr><td>Sports criticism or banter</td><td class="num">5</td></tr><tr><td>Personal criticism not judged offensive</td><td class="num">3</td></tr><tr><td>Sarcasm or irony</td><td class="num">1</td></tr><tr><td>Label noise or genuinely ambiguous</td><td class="num">2</td></tr></tbody></table>
+    <table class="data-table compact-table"><thead><tr><th>Missed offensive (109): category</th><th class="num">n</th></tr></thead><tbody><tr><td>Implicit insult, no profanity</td><td class="num">8</td></tr><tr><td>Masked or abbreviated profanity</td><td class="num">5</td></tr><tr><td>Veiled threat or violence</td><td class="num">3</td></tr><tr><td>Political or religious insult</td><td class="num">4</td></tr><tr><td>Institutional or sports criticism</td><td class="num">3</td></tr><tr><td>Label noise or not offensive</td><td class="num">7</td></tr></tbody></table>
   </div>
   <p class="source">Counts are in the 60-error audit (30 per direction, seed 42); each table sums to 30.</p>
   <div class="example-row">
@@ -635,7 +635,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
       </div>
     </div>
     <div>
-      <table class="data-table"><thead><tr><th>System (dev)</th><th class="num">Macro-F1</th><th class="num">Runs</th><th class="num">Threshold</th></tr></thead><tbody><tr><td>Qwen3-8B, zero-shot</td><td class="num">0.162</td><td class="num">1</td><td class="num">0</td></tr><tr><td>Qwen3-8B, 8 + 742</td><td class="num">0.628 ± 0.034</td><td class="num">3</td><td class="num">3.13 / 2.75 / 2.50</td></tr><tr><td>Gemma-2-9B, zero-shot</td><td class="num">0.412</td><td class="num">1</td><td class="num">0</td></tr><tr><td>Gemma-2-9B, 8 + 742</td><td class="num">0.500 ± 0.048</td><td class="num">3</td><td class="num">0.63 / 0.25 / 0.88</td></tr><tr><td>BERTurk, 750</td><td class="num">0.767 ± 0.014</td><td class="num">10</td><td class="num">—</td></tr><tr><td>BERTurk, 30,000</td><td class="num">0.832 ± 0.003</td><td class="num">3</td><td class="num">—</td></tr></tbody></table>
+      <table class="data-table"><thead><tr><th>System (dev)</th><th class="num">Macro-F1</th><th class="num">Runs</th><th class="num">Threshold</th></tr></thead><tbody><tr><td>Qwen3-8B, zero-shot</td><td class="num">0.162</td><td class="num">1</td><td class="num">0</td></tr><tr><td>Qwen3-8B, 8 + 742</td><td class="num">0.628 ± 0.034</td><td class="num">3</td><td class="num">3.13 / 2.75 / 2.50</td></tr><tr><td>Gemma-2-9B, zero-shot</td><td class="num">0.412</td><td class="num">1</td><td class="num">0</td></tr><tr><td>Gemma-2-9B, 8 + 742</td><td class="num">0.500 ± 0.048</td><td class="num">3</td><td class="num">0.63 / 0.25 / 0.88</td></tr><tr><td>BERTurk, 750</td><td class="num">0.767 ± 0.014</td><td class="num">10</td><td class="num">n/a</td></tr><tr><td>BERTurk, 30,000</td><td class="num">0.832 ± 0.003</td><td class="num">3</td><td class="num">n/a</td></tr></tbody></table>
     </div>
   </div>
   <div class="note-band">
@@ -703,21 +703,21 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 </section>
 
 <!-- notes: The cost view: scoring throughput, wall time, load time and peak memory. Few-shot is much slower because the prompt repeats eight examples. TF-IDF is orders of magnitude cheaper. -->
-<section class="slide " id="s8" data-page="8" data-notes="The cost view: scoring throughput, wall time, load time and peak memory. Few-shot is much slower because the prompt repeats eight examples. TF-IDF is orders of magnitude cheaper." role="group" aria-label="Slide 8 of 14: One dev pass on an L4: 3–5 tweets/s with examples, 10–18 without" aria-hidden="true">
+<section class="slide " id="s8" data-page="8" data-notes="The cost view: scoring throughput, wall time, load time and peak memory. Few-shot is much slower because the prompt repeats eight examples. TF-IDF is orders of magnitude cheaper." role="group" aria-label="Slide 8 of 14: One dev pass on an L4: 3 to 5 tweets/s with examples, 10 to 18 without" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
       <span class="mast-kicker">07 · Cost and throughput</span>
       <span class="mast-num">08 <span class="mast-slash">/</span> 14</span>
     </header>
-    <h1 class="slide-title">One dev pass on an L4: 3–5 tweets/s with examples, 10–18 without</h1>
-    <div class="slide-body"><table class="data-table wide-table"><thead><tr><th>System</th><th class="num">Params</th><th class="num">Dev scoring</th><th class="num">Throughput</th><th class="num">Peak VRAM</th><th class="num">Notes</th></tr></thead><tbody><tr><td>TF-IDF, 750</td><td class="num">—</td><td class="num">0.6 s</td><td class="num">~3,100/s</td><td class="num">CPU</td><td class="num">fit 1.0 s</td></tr><tr><td>TF-IDF, 30,000</td><td class="num">—</td><td class="num">0.6 s</td><td class="num">~3,100/s</td><td class="num">CPU</td><td class="num">fit 14.6 s</td></tr><tr><td>Qwen3-8B, few-shot</td><td class="num">8.2B</td><td class="num">355 s</td><td class="num">5.0/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Gemma-2-9B, few-shot</td><td class="num">9.2B</td><td class="num">430 s</td><td class="num">4.1/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Qwen3-14B, few-shot</td><td class="num">14.8B</td><td class="num">644 s</td><td class="num">2.7/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Gemma-4-12B, few-shot</td><td class="num">12.0B</td><td class="num">579 s</td><td class="num">3.0/s</td><td class="num">—</td><td class="num">3 runs</td></tr><tr><td>Qwen3-14B, zero-shot</td><td class="num">14.8B</td><td class="num">180 s</td><td class="num">9.8/s</td><td class="num">10.7 GB</td><td class="num">load 157 s · 1,290 tok/s</td></tr></tbody></table>
+    <h1 class="slide-title">One dev pass on an L4: 3 to 5 tweets/s with examples, 10 to 18 without</h1>
+    <div class="slide-body"><table class="data-table wide-table"><thead><tr><th>System</th><th class="num">Params</th><th class="num">Dev scoring</th><th class="num">Throughput</th><th class="num">Peak VRAM</th><th class="num">Notes</th></tr></thead><tbody><tr><td>TF-IDF, 750</td><td class="num">n/a</td><td class="num">0.6 s</td><td class="num">~3,100/s</td><td class="num">CPU</td><td class="num">fit 1.0 s</td></tr><tr><td>TF-IDF, 30,000</td><td class="num">n/a</td><td class="num">0.6 s</td><td class="num">~3,100/s</td><td class="num">CPU</td><td class="num">fit 14.6 s</td></tr><tr><td>Qwen3-8B, few-shot</td><td class="num">8.2B</td><td class="num">355 s</td><td class="num">5.0/s</td><td class="num">n/a</td><td class="num">3 runs</td></tr><tr><td>Gemma-2-9B, few-shot</td><td class="num">9.2B</td><td class="num">430 s</td><td class="num">4.1/s</td><td class="num">n/a</td><td class="num">3 runs</td></tr><tr><td>Qwen3-14B, few-shot</td><td class="num">14.8B</td><td class="num">644 s</td><td class="num">2.7/s</td><td class="num">n/a</td><td class="num">3 runs</td></tr><tr><td>Gemma-4-12B, few-shot</td><td class="num">12.0B</td><td class="num">579 s</td><td class="num">3.0/s</td><td class="num">n/a</td><td class="num">3 runs</td></tr><tr><td>Qwen3-14B, zero-shot</td><td class="num">14.8B</td><td class="num">180 s</td><td class="num">9.8/s</td><td class="num">10.7 GB</td><td class="num">load 157 s · 1,290 tok/s</td></tr></tbody></table>
   <div class="two-notes">
-    <p class="source">Scoring the 1,756 dev tweets; model download and load are excluded unless stated. Few-shot is 3–4× slower because each prompt carries 8 examples (~600 tokens).</p>
+    <p class="source">Scoring the 1,756 dev tweets; model download and load are excluded unless stated. Few-shot is 3 to 4× slower because each prompt carries 8 examples (~600 tokens).</p>
     <p class="source">BERTurk: 35 s training at 750 labels, ~29 min at 30,000. Gemma-4-26B-A4B exceeded 22 GB and could not load on L4. Reported runs: 9.4 Colab units (~2.5 L4-hours).</p>
   </div>
   <div class="note-band slim">
     <span class="label">What this buys</span>
-    <p>Few-shot costs 3–4× more per dev pass; BERTurk-750 trains in 35 s, so all 46 fine-tuning runs fit in about 3 Colab units. The LLM arm is the expensive part.</p>
+    <p>Few-shot costs 3 to 4× more per dev pass; BERTurk-750 trains in 35 s, so all 46 fine-tuning runs fit in about 3 Colab units. The LLM arm is the expensive part.</p>
   </div></div>
     <footer class="slide-footer"><span>Team 10 · CSE 484 / CSE 654</span><span>Mid-project · 12 November 2026</span></footer>
   </div>
@@ -733,7 +733,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <h1 class="slide-title">Done: BERTurk and Ablation A. Every remaining step has a date and an owner</h1>
     <div class="slide-body"><div class="split-62">
     <div>
-      <table class="data-table plan-table"><thead><tr><th>Date</th><th class="num">Experiment</th><th class="num">Owner</th><th class="num">Status</th></tr></thead><tbody><tr><td>11 Nov</td><td class="num">BERTurk 750 (10) + 30,000 (3) on dev</td><td class="num">Mert</td><td class="num">done</td></tr><tr><td>11 Nov</td><td class="num">Ablation A: BERTurk vs XLM-R, 750</td><td class="num">Vesile</td><td class="num">done</td></tr><tr><td>12 Nov</td><td class="num">Mid-project talk; freeze this deck</td><td class="num">All</td><td class="num">talk</td></tr><tr><td>21–24 Nov</td><td class="num">Ablation B: Gemma with English instructions</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>25–27 Nov</td><td class="num">Test-contamination check, first 200 test tweets</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>28–30 Nov</td><td class="num">Freeze methods; open test; final runs</td><td class="num">All</td><td class="num">planned</td></tr><tr><td>1–5 Dec</td><td class="num">Paired bootstrap, error analysis, paper</td><td class="num">Mert · Utku</td><td class="num">planned</td></tr><tr><td>8 Dec</td><td class="num">Final report</td><td class="num">All</td><td class="num">planned</td></tr></tbody></table>
+      <table class="data-table plan-table"><thead><tr><th>Date</th><th class="num">Experiment</th><th class="num">Owner</th><th class="num">Status</th></tr></thead><tbody><tr><td>11 Nov</td><td class="num">BERTurk 750 (10) + 30,000 (3) on dev</td><td class="num">Mert</td><td class="num">done</td></tr><tr><td>11 Nov</td><td class="num">Ablation A: BERTurk vs XLM-R, 750</td><td class="num">Vesile</td><td class="num">done</td></tr><tr><td>12 Nov</td><td class="num">Mid-project talk; freeze this deck</td><td class="num">All</td><td class="num">talk</td></tr><tr><td>21 to 24 Nov</td><td class="num">Ablation B: Gemma with English instructions</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>25 to 27 Nov</td><td class="num">Test-contamination check, first 200 test tweets</td><td class="num">Gürkan</td><td class="num">planned</td></tr><tr><td>28 to 30 Nov</td><td class="num">Freeze methods; open test; final runs</td><td class="num">All</td><td class="num">planned</td></tr><tr><td>1 to 5 Dec</td><td class="num">Paired bootstrap, error analysis, paper</td><td class="num">Mert · Utku</td><td class="num">planned</td></tr><tr><td>8 Dec</td><td class="num">Final report</td><td class="num">All</td><td class="num">planned</td></tr></tbody></table>
     </div>
     <div class="stack">
       <div class="risk-card red-edge">
@@ -780,7 +780,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 <section class="slide appendix" id="s11" data-page="11" data-notes="Project Card fields 1-3. Abstract under 150 words with the one marked gap." role="group" aria-label="Slide 11 of 14: Title, abstract, research question, contributions" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
-      <span class="mast-kicker">Project Card · appendix · fields 1–3</span>
+      <span class="mast-kicker">Project Card · appendix · fields 1-3</span>
       <span class="mast-num">11 <span class="mast-slash">/</span> 14</span>
     </header>
     <h1 class="slide-title">Title, abstract, research question, contributions</h1>
@@ -792,7 +792,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     </div>
     <div class="panel">
       <div class="label">2 · Research question</div>
-      <p>Unchanged. With 750 labels, does fine-tuning BERTurk beat prompting Gemma-2-9B-it or Qwen3-8B — same 750 tweets, 8 examples plus 742 threshold labels — on macro-F1 over the official 3,528-tweet test set?</p>
+      <p>Unchanged. With 750 labels, does fine-tuning BERTurk beat prompting Gemma-2-9B-it or Qwen3-8B (same 750 tweets, 8 examples plus 742 threshold labels) on macro-F1 over the official 3,528-tweet test set?</p>
       <p><strong>“No” result:</strong> BERTurk’s mean over 10 runs is not ≥0.02 above the LLM’s mean over 3 runs, or the paired bootstrap says chance (p ≥ 0.05). <strong>Change:</strong> none.</p>
     </div>
     <div class="panel">
@@ -810,7 +810,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 <section class="slide appendix" id="s12" data-page="12" data-notes="Fields 4-5. Eight references with the specific gap; data counts after the fixed split." role="group" aria-label="Slide 12 of 14: Related work and data" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
-      <span class="mast-kicker">Project Card · appendix · fields 4–5</span>
+      <span class="mast-kicker">Project Card · appendix · fields 4-5</span>
       <span class="mast-num">12 <span class="mast-slash">/</span> 14</span>
     </header>
     <h1 class="slide-title">Related work and data</h1>
@@ -843,14 +843,14 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 <section class="slide appendix" id="s13" data-page="13" data-notes="Fields 6-9. Baseline and method, protocol, full results table, error analysis summary." role="group" aria-label="Slide 13 of 14: Method, protocol, results so far, error analysis" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
-      <span class="mast-kicker">Project Card · appendix · fields 6–9</span>
+      <span class="mast-kicker">Project Card · appendix · fields 6-9</span>
       <span class="mast-num">13 <span class="mast-slash">/</span> 14</span>
     </header>
     <h1 class="slide-title">Method, protocol, results so far, error analysis</h1>
     <div class="slide-body"><div class="appendix-grid two">
     <div class="panel">
       <div class="label">6 · Method and baseline</div>
-      <p>TF-IDF word 1–2 + char_wb 2–5, min_df=2, sublinear, Turkish lowercasing; LR C=1.0, balanced. Test 0.763 [0.745, 0.779].</p>
+      <p>TF-IDF word 1-2 + char_wb 2-5, min_df=2, sublinear, Turkish lowercasing; LR C=1.0, balanced. Test 0.763 [0.745, 0.779].</p>
       <p>Fine-tuning: BERTurk/XLM-R, 128 tokens, batch 16, 2e-5, 4 epochs or 400 updates, class-weighted, no early stopping. LLM: Qwen/Gemma 4-bit, 8 examples, 742-label threshold. One change: labels train weights vs choose examples and threshold.</p>
       <p>Compute: about 3 Colab units for the 46 fine-tuning runs + 2.5 L4-h for 16 LLM passes.</p>
       <div class="label" style="margin-top:18px">7 · Evaluation protocol</div>
@@ -859,10 +859,10 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     <div class="panel">
       <div class="label">8 · Results so far (mean ± sd)</div>
       <div class="result-cols">
-        <table class="data-table tiny-table"><thead><tr><th>System</th><th class="num">Dev</th><th class="num">Test</th></tr></thead><tbody><tr><td>Always NOT</td><td class="num">0.447</td><td class="num">0.444</td></tr><tr><td>TF-IDF, 750</td><td class="num">0.613 ± 0.015</td><td class="num">0.620 ± 0.012</td></tr><tr><td>TF-IDF, 30,000</td><td class="num">0.763</td><td class="num">0.763</td></tr><tr><td>Qwen3-8B zero</td><td class="num">0.162</td><td class="num">—</td></tr><tr><td>Qwen3-8B cal</td><td class="num">0.628 ± 0.034</td><td class="num">—</td></tr><tr><td>Qwen3-14B zero</td><td class="num">0.171</td><td class="num">—</td></tr><tr><td>Qwen3-14B cal</td><td class="num">0.773 ± 0.009</td><td class="num">—</td></tr></tbody></table>
-        <table class="data-table tiny-table"><thead><tr><th>System</th><th class="num">Dev</th><th class="num">Test</th></tr></thead><tbody><tr><td>Gemma-2-9B zero</td><td class="num">0.412</td><td class="num">—</td></tr><tr><td>Gemma-2-9B cal</td><td class="num">0.500 ± 0.048</td><td class="num">—</td></tr><tr><td>Gemma-4-12B zero</td><td class="num">0.763</td><td class="num">—</td></tr><tr><td>Gemma-4-12B cal</td><td class="num">0.790 ± 0.007</td><td class="num">—</td></tr><tr><td>BERTurk, 250</td><td class="num">0.680 ± 0.052</td><td class="num">—</td></tr><tr><td>BERTurk, 750</td><td class="num">0.767 ± 0.014</td><td class="num">—</td></tr><tr><td>BERTurk, 2,000</td><td class="num">0.793 ± 0.006</td><td class="num">—</td></tr><tr><td>BERTurk, 6,000</td><td class="num">0.806 ± 0.004</td><td class="num">—</td></tr><tr><td>BERTurk, 30,000</td><td class="num">0.832 ± 0.003</td><td class="num">—</td></tr><tr><td>XLM-R, 750</td><td class="num">0.670 ± 0.025</td><td class="num">—</td></tr></tbody></table>
+        <table class="data-table tiny-table"><thead><tr><th>System</th><th class="num">Dev</th><th class="num">Test</th></tr></thead><tbody><tr><td>Always NOT</td><td class="num">0.447</td><td class="num">0.444</td></tr><tr><td>TF-IDF, 750</td><td class="num">0.613 ± 0.015</td><td class="num">0.620 ± 0.012</td></tr><tr><td>TF-IDF, 30,000</td><td class="num">0.763</td><td class="num">0.763</td></tr><tr><td>Qwen3-8B zero</td><td class="num">0.162</td><td class="num">n/a</td></tr><tr><td>Qwen3-8B cal</td><td class="num">0.628 ± 0.034</td><td class="num">n/a</td></tr><tr><td>Qwen3-14B zero</td><td class="num">0.171</td><td class="num">n/a</td></tr><tr><td>Qwen3-14B cal</td><td class="num">0.773 ± 0.009</td><td class="num">n/a</td></tr></tbody></table>
+        <table class="data-table tiny-table"><thead><tr><th>System</th><th class="num">Dev</th><th class="num">Test</th></tr></thead><tbody><tr><td>Gemma-2-9B zero</td><td class="num">0.412</td><td class="num">n/a</td></tr><tr><td>Gemma-2-9B cal</td><td class="num">0.500 ± 0.048</td><td class="num">n/a</td></tr><tr><td>Gemma-4-12B zero</td><td class="num">0.763</td><td class="num">n/a</td></tr><tr><td>Gemma-4-12B cal</td><td class="num">0.790 ± 0.007</td><td class="num">n/a</td></tr><tr><td>BERTurk, 250</td><td class="num">0.680 ± 0.052</td><td class="num">n/a</td></tr><tr><td>BERTurk, 750</td><td class="num">0.767 ± 0.014</td><td class="num">n/a</td></tr><tr><td>BERTurk, 2,000</td><td class="num">0.793 ± 0.006</td><td class="num">n/a</td></tr><tr><td>BERTurk, 6,000</td><td class="num">0.806 ± 0.004</td><td class="num">n/a</td></tr><tr><td>BERTurk, 30,000</td><td class="num">0.832 ± 0.003</td><td class="num">n/a</td></tr><tr><td>XLM-R, 750</td><td class="num">0.670 ± 0.025</td><td class="num">n/a</td></tr></tbody></table>
       </div>
-      <div class="label" style="margin-top:12px">9 · Error analysis — 60 audited of 275</div>
+      <div class="label" style="margin-top:12px">9 · Error analysis: 60 audited of 275</div>
       <p class="source">False alarms: no insult 9; political/religious 10; sports 5; personal 3; sarcasm 1; label noise 2. Misses: implicit insult 8; masked profanity 5; veiled threat 3; political/religious 4; institutional/sports 3; label noise 7. One example per category is in results/errors/audit.json.</p>
     </div>
   </div></div>
@@ -874,7 +874,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
 <section class="slide appendix" id="s14" data-page="14" data-notes="Fields 10-12. Both research leads wrote their sections. Ablation A complete. Roles to be confirmed." role="group" aria-label="Slide 14 of 14: Research lead, plan and risk, reproducibility" aria-hidden="true">
   <div class="slide-inner">
     <header class="masthead">
-      <span class="mast-kicker">Project Card · appendix · fields 10–12</span>
+      <span class="mast-kicker">Project Card · appendix · fields 10-12</span>
       <span class="mast-num">14 <span class="mast-slash">/</span> 14</span>
     </header>
     <h1 class="slide-title">Research lead, plan and risk, reproducibility</h1>
@@ -886,7 +886,7 @@ body.exporting .deck-controls, body.exporting .edit-toggle, body.exporting .edit
     </div>
     <div class="panel">
       <div class="label">11 · Plan and risk</div>
-      <p>Done: BERTurk curve (36 runs), Ablation A (10). 21–24 Nov: Ablation B (Gürkan). 25–27 Nov: contamination check (Gürkan). 28–30 Nov: freeze, open test, final runs (all). 1–5 Dec: bootstrap, error analysis, paper (Mert · Utku). 8 Dec: report (all).</p>
+      <p>Done: BERTurk curve (36 runs), Ablation A (10). 21 to 24 Nov: Ablation B (Gürkan). 25 to 27 Nov: contamination check (Gürkan). 28 to 30 Nov: freeze, open test, final runs (all). 1 to 5 Dec: bootstrap, error analysis, paper (Mert · Utku). 8 Dec: report (all).</p>
       <p><strong>Biggest risk:</strong> 26B+ may not fit L4; Gemma-4-26B OOM’d at 22 GB, so 12B used. Fallback: Qwen3-14B alone. <strong>Result risk:</strong> lines may never cross; 750-label answer stands. <strong>Proposal feedback:</strong> add a test-set baseline; it is reported once, while methods stay on dev.</p>
     </div>
     <div class="panel">
