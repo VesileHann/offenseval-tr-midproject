@@ -17,7 +17,7 @@ if [[ "${1:-}" == "gpu" ]]; then
     $PY scripts/run_llm.py --model "$model" --mode zeroshot --runs 1 --batch 8
   done
   for model in qwen3-14b gemma-4-12b; do
-    $PY scripts/run_llm.py --model "$model" --mode fewshot  --runs 2 --batch 6
+    $PY scripts/run_llm.py --model "$model" --mode fewshot  --runs 3 --batch 6
     $PY scripts/run_llm.py --model "$model" --mode zeroshot --runs 1 --batch 8
   done
 fi

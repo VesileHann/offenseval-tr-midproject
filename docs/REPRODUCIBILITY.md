@@ -57,7 +57,6 @@ Colab session therefore costs one run, not the experiment.
 
 - Gemma-4-26B-A4B needs more than the 22 GB usable on an L4; it is included in
   the model registry for completeness but is not runnable on that device.
-- The stronger pair has two runs, not three, because of the mid-project time
-  cap. The report says so explicitly.
+- All calibrated models use three runs.
 - The test set was scored once for the deterministic baseline; method test runs
   happen only after methods freeze.
