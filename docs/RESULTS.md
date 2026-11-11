@@ -42,7 +42,9 @@ No run predicted a single class. **Ablation A** (same 10 subsets of 750, same
 seeds and settings): BERTurk − XLM-R-base = +0.097; paired bootstrap over the
 1,756 dev tweets, 10,000 resamples, run-averaged: 95% CI [+0.080, +0.116],
 BERTurk wins on 100% of resamples. Training time per run on one L4: 35 s at 750
-labels, about 29 min at 30,000 (1,657–1,724 s across the three runs; `timing.train_s`).
+labels, about 29 min at 30,000 (1,657–1,724 s; `timing.train_s`) because the three
+30,000-label runs shared one L4; alone a run takes about 11 min (7,500 updates at
+the 0.087 s/update measured at 750 labels).
 
 ## Interpretation
 

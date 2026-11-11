@@ -152,7 +152,7 @@ uv run python scripts/collect_results.py
 ```
 
 One run at 750 labels takes about 35 s of training on an L4; one at 30,000
-about 29 minutes (1,657 to 1,724 s across the three runs). Test predictions are saved in `*_test_scores.csv` but not scored.
+1,657 to 1,724 s (about 29 minutes) with the three runs sharing one L4; alone it is about 11 minutes (7,500 updates at the 0.087 s/update measured at 750 labels). Test predictions are saved in `*_test_scores.csv` but not scored.
 
 ## Contributing
 
