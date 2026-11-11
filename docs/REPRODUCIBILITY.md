@@ -47,6 +47,19 @@ uv run python scripts/collect_results.py
 Each run writes one JSON and one score CSV under `results/llm/<model>/`. A lost
 Colab session therefore costs one run, not the experiment.
 
+## Fine-tuning reproduction
+
+```bash
+uv pip install -e ".[finetune]"
+uv run python scripts/run_finetune.py --model berturk --sizes 250 750 2000 6000 30000
+uv run python scripts/run_finetune.py --model xlmr-base --sizes 750
+uv run python scripts/collect_results.py
+```
+
+fp16 mixed precision on an NVIDIA L4 (Colab). Finished runs are skipped, so a
+lost session costs one run. Retraining a saved run gives the same dev macro-F1
+to three decimals.
+
 ## Expected numbers
 
 `results/summary.json` must match `docs/RESULTS.md`. The baseline check is

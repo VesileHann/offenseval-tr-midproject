@@ -27,6 +27,24 @@ Test curve means at 250 / 750 / 2,000 / 6,000 / 30,000: 0.549 / 0.620 / 0.677 /
 Thresholds chosen on 742 labels: Qwen3-8B 3.13/2.75/2.50; Gemma-2-9B
 0.63/0.25/0.88; Qwen3-14B 4.31/4.69/7.50; Gemma-4-12B −5.00/−4.13/−5.13.
 
+## Dev: fine-tuning arm
+
+| System | Labels | Runs | Mean ± sd | Min–max | OFF recall |
+|---|---:|---:|---:|---:|---:|
+| BERTurk | 250 | 10 | 0.680 ± 0.052 | 0.585–0.746 | 0.38 |
+| BERTurk | 750 | 10 | **0.767 ± 0.014** | 0.739–0.790 | 0.57 |
+| BERTurk | 2,000 | 10 | 0.793 ± 0.006 | 0.784–0.800 | 0.65 |
+| BERTurk | 6,000 | 3 | 0.806 ± 0.004 | 0.802–0.810 | 0.62 |
+| BERTurk | 30,000 | 3 | 0.832 ± 0.003 | 0.829–0.834 | 0.68 |
+| XLM-R-base (Ablation A) | 750 | 10 | 0.670 ± 0.025 | 0.629–0.697 | 0.43 |
+
+No run predicted a single class. **Ablation A** (same 10 subsets of 750, same
+seeds and settings): BERTurk − XLM-R-base = +0.097; paired bootstrap over the
+1,756 dev tweets, 10,000 resamples, run-averaged: 95% CI [+0.080, +0.116],
+BERTurk wins on 100% of resamples. Training time per run on one L4: 35 s at 750
+labels, about 11 min at 30,000 (`timing.train_s` in the run JSONs is higher for
+runs that shared a GPU with another job).
+
 ## Interpretation
 
 - Threshold calibration is what makes the smaller Qwen3 arm usable: Qwen3-8B is
@@ -45,8 +63,14 @@ See `README.md` and `results/timing_from_logs.json`. Few-shot scoring is 3–4×
 slower than zero-shot because each prompt repeats 8 examples (~600 tokens).
 Gemma-4-26B-A4B exceeds the 22 GB usable on an L4 and is not runnable there.
 
+- At 750 labels, fine-tuned BERTurk (0.767) is above Qwen3-8B (0.628) and
+  Gemma-2-9B (0.500), the two LLMs named in the proposal, and below Qwen3-14B
+  (0.773) and Gemma-4-12B (0.790). These are dev numbers; the decision uses test.
+- BERTurk at 750 labels matches TF-IDF at 30,000 (0.763). The curve flattens after
+  2,000 labels, and run-to-run spread is largest at 250.
+
 ## Pending
 
-BERTurk-750 (10 runs), BERTurk-30k (3 runs), Ablation A (XLM-R) and Ablation B
-(English instructions). The final comparison uses the frozen test set and the
-pre-registered paired bootstrap.
+Ablation B (English instructions), then the method freeze and one scoring pass
+on the frozen test set with the pre-registered paired bootstrap. BERTurk and
+XLM-R test predictions are already saved in `results/finetune/*/*_test_scores.csv`.

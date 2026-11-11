@@ -11,6 +11,7 @@
 | `errors/dev_errors.tsv` | All 275 dev errors |
 | `errors/audit.json` | 60-error audit: categories, counts, one example each |
 | `llm/<model>/` | One JSON and score CSV per run; JSON has threshold, F1 and timing |
+| `finetune/<model>/` | One JSON plus dev and test score CSVs per fine-tuning run (BERTurk, XLM-R-base) |
 | `figures/` | Figures used in the deck |
 | `timing_tfidf.json`, `timing_from_logs.json` | CPU latency and per-pass GPU throughput |
 

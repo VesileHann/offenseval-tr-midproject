@@ -14,7 +14,8 @@ log P(A) − log P(B), and the threshold is chosen on the 742 held-out labels. O
 moves Qwen3-8B from 0.162 to 0.628 and Gemma-2-9B from
 0.412 to 0.500; stronger multilingual models reach
 0.773 (Qwen3-14B; zero-shot 0.171) and 0.790 ± 0.007 (Gemma-4-12B), and Gemma-4
-already scores 0.763 zero-shot. **[GAP: BERTurk-750 test result, pending.]**
+already scores 0.763 zero-shot. Fine-tuned BERTurk reaches 0.767 ± 0.014 on dev with 750 labels.
+**[GAP: BERTurk-750 vs LLM test result, after the freeze.]**
 The final paper reports the paired bootstrap gap and the label count at which fine-tuning
 overtakes the LLM line.
 
@@ -33,7 +34,8 @@ baseline, reported separately, which does not alter the question.
 ## 3. Contributions
 
 - **C1.** At 750 labels, BERTurk’s mean test macro-F1 is at least 0.02 above each LLM’s, and a
-  paired bootstrap rejects chance. Core claim; pending BERTurk.
+  paired bootstrap rejects chance. Core claim; test pending. On dev, BERTurk (0.767) is above
+  Qwen3-8B (0.628) and Gemma-2-9B (0.500).
 - **C2.** Choosing the threshold on the 742 non-example labels improves each LLM’s dev macro-F1
   over zero-shot by a measurable margin; we report the per-model delta and its run spread.
 - **C3.** The learning curve places the label count where fine-tuning overtakes the LLM line
@@ -88,11 +90,14 @@ lowercasing; logistic regression C=1.0, class_weight=balanced, max_iter=5000. Te
 
 **Method implemented:** Qwen3-8B and Gemma-2-9B in 4-bit; Turkish instructions, A/B answer
 options, 8 examples (4+4), score log P(A) − log P(B); threshold maximises macro-F1 on the other
-742 labels; dev evaluation.
+742 labels; dev evaluation. BERTurk (`dbmdz/bert-base-turkish-cased`) fine-tuned on every subset:
+128 tokens, batch 16, lr 2e-5, 10% warm-up, class-weighted loss, 4 epochs or 400 updates, no early
+stopping; 36 runs (10 at 250/750/2,000, 3 at 6,000/30,000) plus 10 XLM-R-base runs (Ablation A).
 
 **One change vs baseline:** labels train weights vs choose prompt examples and a threshold.
 
-**Compute used / needed:** about 2.5 L4-hours (9.4 Colab units) for 16 LLM passes; about 18 GPU-hours needed
+**Compute used / needed:** about 2.5 L4-hours (9.4 Colab units) for 16 LLM passes and about 3 Colab
+units on L4 for the 46 fine-tuning runs; about 18 GPU-hours needed
 for the final (proposal estimate), free Colab only.
 
 ## 7. Evaluation protocol
@@ -116,7 +121,12 @@ the mean gap is ≥0.02. Fixed before method results; dev is for code checks onl
 | Qwen3-14B calibrated | 0.773 ± 0.009 | — |
 | Gemma-4-12B zero-shot | 0.763 | — |
 | Gemma-4-12B calibrated | 0.790 ± 0.007 | — |
-| BERTurk, 750 | running | — |
+| BERTurk, 250 | 0.680 ± 0.052 | — |
+| BERTurk, 750 | 0.767 ± 0.014 | — |
+| BERTurk, 2,000 | 0.793 ± 0.006 | — |
+| BERTurk, 6,000 | 0.806 ± 0.004 | — |
+| BERTurk, 30,000 | 0.832 ± 0.003 | — |
+| XLM-R-base, 750 (Ablation A) | 0.670 ± 0.025 | — |
 
 ## 9. Error analysis
 
@@ -141,9 +151,10 @@ two-class tasks and once run variance is counted; all eight datasets are English
 Turkish, a suffix-heavy language, on a noisy two-class task with 19.3% offensive tweets.
 (2) Schmitt & Schweter, SindBERT, arXiv:2510.21364 (2025): compare Turkish encoders on
 OffensEval-TR only with full training data, no LLMs and no small sizes. We add both. **Ablation
-A:** BERTurk vs multilingual XLM-R-base at 750 labels, 10 runs each. **Published comparison:**
-KUISAIL reports plain fine-tuned BERTurk at 0.816 on this test set; our 30,000-label run should
-reproduce it.
+A:** BERTurk vs multilingual XLM-R-base at 750 labels, 10 runs each; done on dev: +0.097, paired
+bootstrap 95% CI [+0.080, +0.116]. **Published comparison:** KUISAIL reports plain fine-tuned
+BERTurk at 0.816 on this test set; our 30,000-label runs score 0.832 ± 0.003 on dev, test after
+the freeze.
 
 **Gürkan Göztepeli (CSE 654), prompting side.** (1) Şeker, Uludoğan, Önal & Özgür, HATECAT-TR,
 Findings of EMNLP 2025: fine-tuned BERTurk (0.59 F1) beat LLaMA-3.3-70B with a few examples
@@ -155,7 +166,7 @@ Gemma-2-9B with English instructions, same examples and threshold method, 3 runs
 
 ## 11. Plan and risk
 
-13–16 Nov: BERTurk 750 (10) + 30k (3). 17–20 Nov: Ablation A XLM-R. 21–24 Nov:
+Done: BERTurk learning curve (36 runs) and Ablation A XLM-R (10 runs) on dev. 21–24 Nov:
 Ablation B English instructions. 25–27 Nov: zero-shot + contamination check. 28–30 Nov: freeze
 methods, open test, final runs. 1–5 Dec: bootstrap, error analysis, paper. 8 Dec: final report.
 Owners to be confirmed.

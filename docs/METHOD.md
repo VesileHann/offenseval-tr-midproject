@@ -19,12 +19,14 @@ stratified with seed 42, into 30,000 train and 1,756 dev. The 3,528 test tweets
 are frozen. Subset *k* of size *n* uses seed `42 + k`; all systems use the same
 saved subsets.
 
-## Fine-tuning arm (pending)
+## Fine-tuning arm (implemented)
 
 BERTurk (`dbmdz/bert-base-turkish-cased`) with a classification head. Tweets are
 cut to 128 tokens; batch 16; learning rate 2e-5 with 10% warm-up; class-weighted
 cross-entropy; 4 epochs or 400 updates, whichever is longer; no early stopping.
-A run that predicts one class is reported, not rerun.
+A run that predicts one class is reported, not rerun. Run *k* trains on subset
+*k* with seed 42 + k; a tweet is OFF when P(OFF) ≥ 0.5. Code:
+`src/offenseval_tr/finetune.py`, `scripts/run_finetune.py`.
 
 ## LLM arm (implemented)
 
@@ -46,7 +48,7 @@ are used: to update weights (BERTurk) or to choose examples and a threshold
 
 ## Controlled comparisons
 
-- **Ablation A (planned):** BERTurk vs multilingual XLM-R-base, 750 labels,
+- **Ablation A (done on dev):** BERTurk vs multilingual XLM-R-base, 750 labels,
   10 runs each, to test whether Turkish-only pretraining explains BERTurk.
 - **Ablation B (planned):** Gemma-2-9B with English instructions, same examples
   and threshold method, 3 runs, to test instruction-language sensitivity.

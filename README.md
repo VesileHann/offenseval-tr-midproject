@@ -11,8 +11,9 @@ open LLM that uses the same 750 labels — 8 as prompt examples and the other 74
 to choose its decision threshold — on macro-F1 over the official OffensEval-TR
 2020 test set?
 
-**Status.** Mid-project. The baseline and the no-fine-tuning LLM arm are
-complete. BERTurk-750 is pending and will be added before the final report.
+**Status.** Mid-project. The baseline, the no-fine-tuning LLM arm and the
+fine-tuning arm (BERTurk learning curve and Ablation A) are complete on dev.
+Method test scores wait for the final freeze.
 
 ## Key results (dev, 1,756 tweets)
 
@@ -24,6 +25,19 @@ complete. BERTurk-750 is pending and will be added before the final report.
 | Qwen3-14B | 0.171 | **0.773 ± 0.010** | +0.602 | 3 |
 | **Gemma-4-12B** | **0.763** | **0.790 ± 0.007** | +0.027 | 3 |
 
+**Fine-tuning arm (dev):**
+
+| System | 250 | 750 | 2,000 | 6,000 | 30,000 |
+|---|---:|---:|---:|---:|---:|
+| BERTurk | 0.680 ± 0.052 | **0.767 ± 0.014** | 0.793 ± 0.006 | 0.806 ± 0.004 | 0.832 ± 0.003 |
+| XLM-R-base (Ablation A) | — | 0.670 ± 0.025 | — | — | — |
+| TF-IDF + LR | 0.557 ± 0.020 | 0.613 ± 0.015 | 0.673 ± 0.009 | 0.727 ± 0.005 | 0.763 |
+
+10 runs at 250/750/2,000 labels, 3 at 6,000/30,000. At 750 labels BERTurk is
+above Qwen3-8B and Gemma-2-9B (the two LLMs named in the proposal) and below
+Qwen3-14B and Gemma-4-12B on dev. Ablation A: BERTurk − XLM-R = +0.097 (paired
+bootstrap over dev tweets, 95% CI [+0.080, +0.116]).
+
 **Frozen test baseline:** TF-IDF with 30,000 labels reaches **0.763** macro-F1
 (95% bootstrap CI [0.745, 0.779]); with 750 labels it reaches 0.620 ± 0.012.
 The deterministic baseline was scored once on test; method results stay on dev
@@ -34,8 +48,9 @@ until the final freeze.
 - **Data:** official OffensEval-TR 2020 release (Çöltekin, LREC 2020), annotations
   CC BY 2.0. 31,756 official training tweets split into 30,000 train / 1,756 dev
   (stratified, seed 42); 3,528 official test tweets.
-- **Fine-tuning arm (pending):** BERTurk with a classification head, 4 epochs or
-  400 updates, class-weighted loss, no early stopping.
+- **Fine-tuning arm:** BERTurk with a classification head; 128 tokens, batch 16,
+  lr 2e-5 with 10% warm-up, class-weighted loss, 4 epochs or 400 updates
+  (whichever is longer), no early stopping. Run *k* uses subset *k* and seed 42 + k.
 - **LLM arm:** 4-bit NF4 open decoders. Turkish instructions, 8 labelled examples
   (4 offensive, 4 not), answer options A/B. The model does not generate: we read
   `log P(A) − log P(B)` at the first answer token. The threshold maximises
@@ -68,15 +83,18 @@ src/offenseval_tr/        importable package
   metrics.py              macro-F1, bootstrap CI, paired bootstrap, threshold
   baselines.py            majority and TF-IDF + logistic regression
   llm.py                  prompt construction, 4-bit scoring, calibration
+  finetune.py             BERTurk / XLM-R fine-tuning on the shared subsets
 scripts/                  thin command-line entry points
   run_baseline.py         dev curve and saved split/subsets
   run_test_baseline.py    frozen-test baseline with CI
   extract_errors.py       275 dev errors + reproducible 60-error audit
   run_llm.py              zero-shot / few-shot calibration
+  run_finetune.py         fine-tuning runs (learning curve, Ablation A)
   collect_results.py      aggregate results/summary.json
 results/
   baseline/               curves, ids, subsets, test predictions
   llm/<model>/            one JSON + score CSV per run
+  finetune/<model>/       one JSON + dev/test score CSV per run
   errors/                 dev errors and audit
   figures/                deck figures
   summary.json            every number used in the report
@@ -118,6 +136,18 @@ uv run python scripts/collect_results.py
 Models: `qwen3-8b`, `gemma-2-9b`, `qwen3-14b`, `gemma-4-12b`,
 `gemma-4-26b-a4b` (does not fit a 24 GB L4). Runs write one JSON and one score
 CSV per run, so a lost session costs one run, not the experiment.
+
+### Fine-tuning arm (GPU)
+
+```bash
+uv pip install -e ".[finetune]"
+uv run python scripts/run_finetune.py --model berturk --sizes 250 750 2000 6000 30000
+uv run python scripts/run_finetune.py --model xlmr-base --sizes 750
+uv run python scripts/collect_results.py
+```
+
+One run at 750 labels takes about 35 s of training on an L4; one at 30,000 about
+11 minutes. Test predictions are saved in `*_test_scores.csv` but not scored.
 
 ## Contributing
 
